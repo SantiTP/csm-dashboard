@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSM Command Centre — Santi Perez</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #8b8d98;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --green: #00b894;
+    --amber: #fdcb6e;
+    --red: #e17055;
+    --blue: #74b9ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-light), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .last-updated { font-size: 0.8rem; color: var(--muted); }
+  .live-dot {
+    display: inline-block; width: 8px; height: 8px;
+    background: var(--green); border-radius: 50%;
+    margin-right: 6px; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card.full-width { grid-column: 1 / -1; }
+  .card-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 1rem;
+  }
+  .card-header h2 {
+    font-size: 1rem; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-header .badge {
+    font-size: 0.7rem; padding: 2px 8px;
+    border-radius: 99px; font-weight: 500;
+  }
+  .badge-green { background: rgba(0,184,148,0.15); color: var(--green); }
+  .badge-amber { background: rgba(253,203,110,0.15); color: var(--amber); }
+  .badge-red { background: rgba(225,112,85,0.15); color: var(--red); }
+  .badge-blue { background: rgba(116,185,255,0.15); color: var(--blue); }
+  .card-timestamp { font-size: 0.7rem; color: var(--muted); }
+  .card-body { font-size: 0.88rem; color: var(--muted); }
+  .card-body ul { list-style: none; padding: 0; }
+  .card-body li {
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .card-body li:last-child { border-bottom: none; }
+  .icon { font-size: 1rem; flex-shrink: 0; }
+  .stat-row { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
+  .stat {
+    flex: 1; text-align: center; padding: 0.75rem;
+    background: rgba(108,92,231,0.08); border-radius: 8px;
+  }
+  .stat-value { font-size: 1.4rem; font-weight: 700; color: var(--text); }
+  .stat-label {
+    font-size: 0.7rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .empty-state {
+    text-align: center; padding: 2rem;
+    color: var(--muted); font-style: italic;
+  }
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    body { padding: 1rem; }
+  }
+  .task-content { min-height: 60px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>CSM Command Centre</h1>
+    <div class="last-updated"><span class="live-dot"></span>Last consolidated: <span id="consolidated-at">—</span></div>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:0.85rem;color:var(--muted)">Santi Perez · Amplitude</div>
+    <div style="font-size:0.75rem;color:var(--muted)">Melbourne AEST</div>
+  </div>
+</header>
+<div class="stat-row" id="stats-bar">
+  <div class="stat"><div class="stat-value" id="stat-at-risk">—</div><div class="stat-label">At-Risk Accounts</div></div>
+  <div class="stat"><div class="stat-value" id="stat-open-items">—</div><div class="stat-label">Open Items</div></div>
+  <div class="stat"><div class="stat-value" id="stat-upsell">—</div><div class="stat-label">Upsell Signals</div></div>
+  <div class="stat"><div class="stat-value" id="stat-meetings">—</div><div class="stat-label">Meetings Today</div></div>
+</div>
+<div class="grid">
+  <div class="card" id="card-morning-briefing">
+    <div class="card-header"><h2><span class="icon">&#9728;</span> Morning Briefing</h2><span class="badge badge-blue">Daily 9am</span></div>
+    <div class="card-timestamp">Last run: <span class="ts" data-task="morning-briefing">—</span></div>
+    <div class="card-body task-content" id="content-morning-briefing"><div class="empty-state">Awaiting first run…</div></div>
+  </div>
+  <div class="card" id="card-eod-wrap-up">
+    <div class="card-header"><h2><span class="icon">&#9789;</span> EOD Wrap-Up</h2><span class="badge badge-amber">Daily 5pm</span></div>
+    <div class="card-timestamp">Last run: <span class="ts" data-task="eod-wrap-up">—</span></div>
+    <div class="card-body task-content" id="content-eod-wrap-up"><div class="empty-state">Awaiting first run…</div></div>
+  </div>
+  <div class="card" id="card-inbox-triage">
+    <div class="card-header"><h2><span class="icon">&#128229;</span> Inbox Triage</h2><span class="badge badge-green">Every 2h</span></div>
+    <div class="card-timestamp">Last run: <span class="ts" data-task="inbox-triage">—</span></div>
+    <div class="card-body task-content" id="content-inbox-triage"><div class="empty-state">Awaiting first run…</div></div>
+  </div>
+  <div class="card" id="card-monday-weekly-review">
+    <div class="card-header"><h2><span class="icon">&#128203;</span> Monday Weekly Review</h2><span class="badge badge-blue">Mon 8am</span></div>
+    <div class="card-timestamp">Last run: <span class="ts" data-task="monday-weekly-review">—</span></div>
+    <div class="card-body task-content" id="content-monday-weekly-review"><div class="empty-state">Awaiting first run…</div></div>
+  </div>
+  <div class="card full-width" id="card-friday-weekly-wrap-up">
+    <div class="card-header"><h2><span class="icon">&#127881;</span> Friday Weekly Wrap-Up</h2><span class="badge badge-amber">Fri 4pm</span></div>
+    <div class="card-timestamp">Last run: <span class="ts" data-task="friday-weekly-wrap-up">—</span></div>
+    <div class="card-body task-content" id="content-friday-weekly-wrap-up"><div class="empty-state">Awaiting first run…</div></div>
+  </div>
+</div>
+<!-- __DASHBOARD_DATA_START__ -->
+<script>
+window.__DASHBOARD_DATA = {
+  "consolidatedAt": null,
+  "stats": { "atRisk": "—", "openItems": "—", "upsell": "—", "meetings": "—" },
+  "tasks": {}
+};
+</script>
+<!-- __DASHBOARD_DATA_END__ -->
+<script>
+(function() {
+  var data = window.__DASHBOARD_DATA;
+  if (!data || !data.consolidatedAt) return;
+  document.getElementById('consolidated-at').textContent =
+    new Date(data.consolidatedAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'medium', timeStyle: 'short' });
+  var s = data.stats || {};
+  if (s.atRisk !== undefined) document.getElementById('stat-at-risk').textContent = s.atRisk;
+  if (s.openItems !== undefined) document.getElementById('stat-open-items').textContent = s.openItems;
+  if (s.upsell !== undefined) document.getElementById('stat-upsell').textContent = s.upsell;
+  if (s.meetings !== undefined) document.getElementById('stat-meetings').textContent = s.meetings;
+  var tasks = data.tasks || {};
+  Object.keys(tasks).forEach(function(taskId) {
+    var t = tasks[taskId];
+    var contentEl = document.getElementById('content-' + taskId);
+    var tsEl = document.querySelector('[data-task="' + taskId + '"]');
+    if (contentEl && t.html) contentEl.innerHTML = t.html;
+    if (tsEl && t.lastRun) {
+      tsEl.textContent = new Date(t.lastRun).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'medium', timeStyle: 'short' });
+    }
+  });
+})();
+</script>
+</body>
+</html>
