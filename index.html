@@ -11,179 +11,129 @@
     --border: #2a2d3a;
     --text: #e4e4e7;
     --muted: #9ca3af;
-    --accent: #818cf8;
-    --red: #f87171;
-    --amber: #fbbf24;
-    --green: #34d399;
-    --blue: #60a5fa;
+    --accent: #6366f1;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --green: #22c55e;
+    --blue: #3b82f6;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 24px; line-height: 1.5; }
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 24px; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
   .header h1 { font-size: 22px; font-weight: 600; }
-  .header .ts { font-size: 13px; color: var(--muted); }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .stat .num { font-size: 36px; font-weight: 700; }
-  .stat .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .stat.red .num { color: var(--red); }
-  .stat.amber .num { color: var(--amber); }
-  .stat.green .num { color: var(--green); }
-  .stat.blue .num { color: var(--blue); }
-  .sections { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .header .ts { color: var(--muted); font-size: 13px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-card .value { font-size: 36px; font-weight: 700; }
+  .stat-card .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .stat-card.risk .value { color: var(--red); }
+  .stat-card.open .value { color: var(--amber); }
+  .stat-card.upsell .value { color: var(--green); }
+  .stat-card.meetings .value { color: var(--blue); }
+  .sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .section.full { grid-column: 1 / -1; }
-  .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-  .section .meta { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .section.full-width { grid-column: 1 / -1; }
+  .section h2 { font-size: 15px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .section .last-run { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
   .section ul { list-style: none; padding: 0; }
-  .section li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 14px; display: flex; align-items: flex-start; gap: 8px; }
+  .section li { padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
   .section li:last-child { border-bottom: none; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
   .dot.red { background: var(--red); }
   .dot.amber { background: var(--amber); }
   .dot.green { background: var(--green); }
   .dot.blue { background: var(--blue); }
   .dot.grey { background: #6b7280; }
-  .tag { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
-  .tag.critical { background: rgba(248,113,113,0.15); color: var(--red); }
-  .tag.high { background: rgba(251,191,36,0.15); color: var(--amber); }
-  .tag.medium { background: rgba(96,165,250,0.15); color: var(--blue); }
-  .tag.upsell { background: rgba(52,211,153,0.15); color: var(--green); }
-  .tag.overdue { background: rgba(248,113,113,0.15); color: var(--red); }
-  .muted-note { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 8px; }
-  @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } .sections { grid-template-columns: 1fr; } }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 11px; font-weight: 500; }
+  .badge.critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge.high { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .badge.upsell { background: rgba(34,197,94,0.15); color: var(--green); }
+  .stale-note { color: var(--muted); font-style: italic; font-size: 12px; }
+  @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .sections { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>CSM Command Centre</h1>
-  <div class="ts">Last consolidated: Fri 17 Apr 2026, 10:30 AEST</div>
+  <span class="ts" id="timestamp"></span>
 </div>
+<div class="stats-grid" id="stats"></div>
+<div class="sections" id="sections"></div>
 
 <!-- __DASHBOARD_DATA_START__ -->
 <script>
 window.__DASHBOARD_DATA = {
-  "consolidatedAt": "2026-04-20T09:00:00+10:00",
-  "stats": { "atRisk": 4, "openItems": 17, "upsell": 3, "meetings": 3 },
+  "consolidatedAt": "2026-04-21T09:30:00+10:00",
+  "stats": { "atRisk": 8, "openItems": 27, "upsell": 8, "meetings": 4 },
   "tasks": {
     "morning-briefing": {
-      "lastRun": "2026-04-20T09:00:00+10:00",
-      "html": "<ul><li><span class='dot red'></span><strong>BOQ</strong> — Critical risk. Only 6 MAUs, platform utilisation 25%. Renewal 30 Apr. Model churn prediction: $11.1K. Discuss with Richard in today’s POD.</li><li><span class='dot red'></span><strong>Beem It</strong> — High risk but CSM outlook is Upsell. Single product (Analytics), $628K tpARR whitespace. Renewal 30 Apr. Schedule EBR urgently.</li><li><span class='dot red'></span><strong>SKY TV</strong> — High risk, $146.9K ARR, single product. $1.94M tpARR whitespace. Prepare Session Replay cross-sell narrative for renewal 30 Apr.</li><li><span class='dot amber'></span><strong>Mater Foundation</strong> — MAU declining (-7%). Multi-product but shallow. $71.2K ARR, renewal 31 May. Investigate decline driver.</li><li><span class='dot blue'></span><strong>09:00</strong> — Weekly catch up</li><li><span class='dot blue'></span><strong>11:00</strong> — Send stand up update</li><li><span class='dot blue'></span><strong>13:00</strong> — ANZ EE Weekly POD Meeting (Heeren, Simon, Ritwik, Anthony, Jamie)</li><li><span class='dot green'></span><strong>Prep note:</strong> POD agenda covers deals in flight + CQ renewals. Bring BOQ, Beem It, and SKY TV renewal status updates.</li></ul>"
+      "lastRun": "2026-04-21T09:30:00+10:00",
+      "html": "<ul><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>SKY Network Television</b> â $146.9K ARR, renewal <b>30 Apr</b> (9 days). Single product (Analytics). tpARR whitespace $1.94M. Prep Session Replay cross-sell narrative.</li><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>Bank of Queensland</b> â $74K ARR, renewal <b>30 Apr</b> (9 days). Analytics + Web Exp. North Star metric discussion needed across all six brands.</li><li><span class='dot red'></span><span class='badge high'>HIGH</span> <b>Beem It</b> â $70.2K ARR, renewal <b>30 Apr</b> (9 days). Outlook: Upsell. Analytics only, tpARR $628K.</li><li><span class='dot amber'></span><span class='badge high'>HIGH</span> <b>Jumbo Interactive</b> â $190K ARR, renewal <b>31 May</b>. Order form going to Deal Desk (6-month at $85K churn).</li><li><span class='dot amber'></span><span class='badge high'>HIGH</span> <b>Mater Foundation</b> â $71.2K ARR, renewal <b>31 May</b>. MAU declining (-7%). Multi-product but shallow. Investigate decline.</li><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>Eucalyptus</b> â $77.6K ARR, renewal Feb 2027. <b>RED health.</b> Only 5 MAUs. PS catchup today at 3 PM.</li><li><span class='dot green'></span><b>Today's meetings:</b> VGW Contract Review (1:30 PM) Â· ANZ POD (2:30 PM) Â· Eucalyptus PS (3 PM) Â· Qi 1:1 (4 PM)</li><li><span class='dot green'></span><span class='badge upsell'>UPSELL</span> signals on: Beem It, Lendi, Dabble, OnePass, SafetyCulture, PlaceIt, VGW, Zip Co</li></ul>"
     },
     "eod-wrap-up": {
-      "lastRun": "2026-04-20T09:00:00+10:00",
-      "html": "<ul><li><span class='dot amber'></span><strong>Due today:</strong> Build 3 starter dashboards for Ferocia team onboarding (onboarding funnel, HUAM referral, payment conversion)</li><li><span class='dot red'></span><strong>Overdue (urgent):</strong> Beem It renewal prep, SKY TV renewal positioning, BOQ renewal save plan — all due 16 Apr</li><li><span class='dot red'></span><strong>Overdue:</strong> SafetyCulture expansion pitch &amp; Mater Foundation MAU investigation — due 18 Apr</li><li><span class='dot amber'></span><strong>Overdue:</strong> Activate AI Feedback digest for Up Bank (7 Apr), Call Raquel re OneDigital training (10 Apr)</li><li><span class='dot grey'></span><strong>Carry forward:</strong> CultureAmp AI Chat demo (30 Apr), Agree mobile North Star with Andy Clifford (30 Apr)</li></ul>"
+      "lastRun": "2026-04-21T09:30:00+10:00",
+      "html": "<ul><li><span class='dot blue'></span><b>Pending for today:</b> VGW contract review â prepare pricing model walkthrough &amp; usage trends for Nick Rutherford</li><li><span class='dot blue'></span>Eucalyptus PS sync â address RED health, only 5 MAUs, push for re-engagement</li><li><span class='dot blue'></span>ANZ POD â review current deals in flight, CQ renewals, existing customer activity</li><li><span class='dot amber'></span><b>Carry forward:</b> Lendi workshop (placeholder for Wed 22 Apr 2 PM). Confirm Jamie as SE.</li><li><span class='dot amber'></span>Dabble sync with Fergus &amp; Hamish this week â align on KPIs</li><li><span class='dot amber'></span>SafetyCulture â schedule consultative data architecture call with Chi (CSA) &amp; Jamie</li><li><span class='dot amber'></span>RSL Queensland â Teresa to respond on team availability by Wed 23 Apr</li><li><span class='dot grey'></span>Brisbane trip planning (May 6â8): Intent, RSL, Jumbo, BOQ. Confirm logistics.</li></ul>"
     },
     "inbox-triage": {
-      "lastRun": "2026-04-20T09:00:00+10:00",
-      "html": "<ul><li><span class='dot amber'></span><strong>Slack — Heeren Gandhi:</strong> Re Agus call follow-up (group DM with Simon). Check outcome.</li><li><span class='dot amber'></span><strong>Slack — Richard Prabhu:</strong> Shared link + Cloudflare recommendation. Review and action.</li><li><span class='dot blue'></span><strong>Slack — Raquael Fantidis:</strong> Confirmed monthly meetings in May, session replay limits adjustment. Schedule Friday cadence.</li><li><span class='dot blue'></span><strong>Slack — Devin Sasminto:</strong> Confirmed you lead upcoming call. Prep required.</li><li><span class='dot blue'></span><strong>Slack — Adam Craig:</strong> Timeline flexibility noted — push out a few days.</li><li><span class='dot grey'></span><strong>Gmail:</strong> Data unavailable — connector requires re-authentication.</li><li><span class='dot amber'></span><strong>Asana:</strong> 13 overdue tasks across accounts. 3 marked URGENT (BOQ, Beem It, SKY TV).</li></ul>"
+      "lastRun": "2026-04-21T09:30:00+10:00",
+      "html": "<ul><li><span class='dot red'></span><b>Slack â Jamie Lim:</b> Asking if VGW engagement is aligned with Heeren's PSP engagement or separate. <b>Reply needed.</b></li><li><span class='dot red'></span><b>Slack â Qi Wang:</b> Asking about pushing Eucalyptus training to next week. <b>Reply needed.</b></li><li><span class='dot amber'></span><b>Slack â Edwina Paul (VGW):</b> Shared training agenda details â post-click behaviour, funnel deep-dives. Review before 1:30 PM meeting.</li><li><span class='dot amber'></span><b>Slack â Billy Perrier (RSL):</b> Thursday only option for in-office visit. Teresa sorting attendance. Lunch offer.</li><li><span class='dot amber'></span><b>Slack â Ritwik:</b> Starting Envato handover. Met Endeavour Dec, Mater recently. Checking Endeavour availability.</li><li><span class='dot grey'></span><b>Gmail:</b> Data unavailable â connector requires reload.</li><li><span class='dot amber'></span><b>Asana:</b> 12 overdue tasks. Highest priority: SKY TV renewal (due 16 Apr), SafetyCulture expansion (due 18 Apr), Mater MAU investigation (due 18 Apr), Ferocia dashboards (due 20 Apr).</li></ul>"
     },
     "monday-weekly-review": {
       "lastRun": "2026-04-20T09:00:00+10:00",
-      "html": "<ul><li><span class='dot red'></span><strong>Critical renewals (30 Apr):</strong> BOQ ($11.1K churn risk), Beem It (upsell opp despite risk), SKY TV ($146.9K ARR at risk) — all overdue on prep tasks</li><li><span class='dot amber'></span><strong>Mater Foundation:</strong> MAU declining 7% ahead of 31 May renewal. Needs re-engagement plan this week.</li><li><span class='dot green'></span><strong>Expansion pipeline:</strong> SafetyCulture (SR + Experiment, $285K gap), CultureAmp (AI Agents demo), Beem It ($628K whitespace)</li><li><span class='dot blue'></span><strong>Ferocia / Up Bank:</strong> 3 dashboards due today. Monthly check-in cadence and AI Feedback digest both in flight.</li><li><span class='dot blue'></span><strong>BOQ success plan:</strong> 25+ active milestones through 2027. Experimentation workshop, AI Feedback pilot, mobile funnel build all progressing. Wootric contract date still TBC.</li><li><span class='dot amber'></span><strong>OneDigital (Raquel):</strong> Training coordination call overdue. Monthly cadence agreed for May start — schedule this week.</li><li><span class='dot green'></span><strong>Key relationships:</strong> Active threads with Simon Rumble, Heeren Gandhi, Richard Prabhu, Devin Sasminto. POD meeting today for deal review.</li><li><span class='dot grey'></span><strong>Week focus:</strong> Close out 30 Apr renewal prep (BOQ, Beem It, SKY TV), progress SafetyCulture pitch, deliver Ferocia dashboards.</li></ul>"
+      "html": "<ul><li class='stale-note'>(Last updated: Monday 20 April 2026)</li><li><span class='dot amber'></span><b>Week in review:</b> 3 imminent renewals (SKY, BOQ, Beem It) all due 30 Apr. Combined ARR at risk: $291K.</li><li><span class='dot green'></span>Jumbo order form submitted to Deal Desk (6-month renewal at $85K churn reduction).</li><li><span class='dot green'></span>Lendi workshop placeholder locked â Mon or Wed, 2 PM.</li><li><span class='dot amber'></span>20-account audit target set for this week â stakeholder connections, use cases, outcomes, cadence.</li><li><span class='dot blue'></span>Brisbane trip (May 6â8) confirmed: Intent (full day Wed), RSL + Jumbo (Thu), BOQ (Fri AM).</li><li><span class='dot amber'></span>David on leave from 22 Apr for 2 weeks. Jamie leading coordination. Flybys prep &amp; Kmart SE engagement.</li><li><span class='dot green'></span>APJ AI Week leadership follow-up session scheduled. Awards &amp; recognition incoming.</li></ul>"
     },
     "friday-weekly-wrap-up": {
-      "lastRun": "2026-04-18T17:00:00+10:00",
-      "html": "<ul><li><span class='dot grey'></span><em>(Last updated: Friday 18 April 2026)</em></li><li><span class='dot grey'></span>No Friday wrap-up data for this week yet. Will be updated on Friday 24 April.</li></ul>"
+      "lastRun": "2026-04-17T17:00:00+10:00",
+      "html": "<ul><li class='stale-note'>(Last updated: Friday 18 April 2026)</li><li><span class='dot green'></span><b>Wins:</b> Lendi workshop date locked. Jumbo order form progressing. VGW contract review scheduled.</li><li><span class='dot amber'></span><b>Gaps:</b> SKY TV renewal positioning still incomplete. Mater MAU decline uninvestigated. Ferocia dashboards not started.</li><li><span class='dot blue'></span><b>Next week preview:</b> VGW contract review Tue. Eucalyptus PS sync. Lendi workshop. Dabble KPI alignment. Brisbane trip logistics.</li><li><span class='dot amber'></span>SafetyCulture expansion pitch overdue â draft before Brisbane trip.</li><li><span class='dot grey'></span>Linktree â partial churn outlook. Enablement sessions on hold until Catherine returns.</li></ul>"
     }
   }
 };
 </script>
 <!-- __DASHBOARD_DATA_END__ -->
 
-<div class="stats">
-  <div class="stat red"><div class="num">11</div><div class="label">At-Risk Accounts</div></div>
-  <div class="stat amber"><div class="num">13</div><div class="label">Open Items</div></div>
-  <div class="stat green"><div class="num">8</div><div class="label">Upsell Signals</div></div>
-  <div class="stat blue"><div class="num">7</div><div class="label">Meetings Today</div></div>
-</div>
-
-<div class="sections">
-
-  <!-- MORNING BRIEFING -->
-  <div class="section full">
-    <h2>Morning Briefing</h2>
-    <div class="meta">Updated: Fri 17 Apr 2026, 10:30 AEST</div>
-    <ul>
-      <li><span class="dot red"></span><strong>BOQ</strong> â <span class="tag critical">Critical</span> Renews 30 Apr (13 days). Only 5 MAUs, Platform Util Critical. $74K ARR. Discuss save plan with Richard today.</li>
-      <li><span class="dot amber"></span><strong>Beem It</strong> â <span class="tag high">High</span> Renews 30 Apr (13 days). <span class="tag upsell">Upsell</span> outlook. Single-blade Analytics, $628K tpARR whitespace. Last EBR Oct 2025 â stale. Schedule EBR + expansion pitch.</li>
-      <li><span class="dot amber"></span><strong>SKY Network TV</strong> â <span class="tag high">High</span> Renews 30 Apr (13 days). $147K ARR, single-blade Analytics. $1.94M tpARR whitespace. Prep Session Replay cross-sell narrative.</li>
-      <li><span class="dot amber"></span><strong>Jumbo Interactive</strong> â <span class="tag high">High</span> Renews 31 May (44 days). $190K ARR, multi-product. $85K model churn prediction â highest in book. Last EBR Dec 2024 â very stale.</li>
-      <li><span class="dot amber"></span><strong>Mater Foundation</strong> â <span class="tag high">High</span> Renews 31 May (44 days). Declining MAU (-7%). Investigate re-engagement before May renewal.</li>
-      <li><span class="dot blue"></span><strong>SafetyCulture</strong> â <span class="tag upsell">Upsell</span> $187K ARR, 71 AI MAUs (strongest in book). Using Hotjar (SR displacement). $285K tpARR gap. Expansion pitch due tomorrow.</li>
-      <li><span class="dot green"></span><strong>Lendi</strong> â Use-case & success metrics call completed Tue 15 Apr with Adam Craig & team. Follow up on action items from Granola notes.</li>
-      <li><span class="dot blue"></span><strong>Today's calendar:</strong> Skills Sharing (1am), Claire Vo HQ Speaker (2am), Bi-weekly All Hands (4am), Happy Hour (9am), APJ Watch Party: Claire Vo (12:30pm), APJ Demo Session â mandatory (3pm).</li>
-    </ul>
-  </div>
-
-  <!-- INBOX TRIAGE -->
-  <div class="section">
-    <h2>Inbox Triage</h2>
-    <div class="meta">Updated: Fri 17 Apr 2026, 10:30 AEST</div>
-    <ul>
-      <li><span class="dot green"></span><strong>Gmail:</strong> Inbox zero â no unread primary emails.</li>
-      <li><span class="dot amber"></span><strong>Slack DM:</strong> Richard Prabhu sent 2 messages (re: Cloudflare recommendation). Review and respond.</li>
-      <li><span class="dot red"></span><strong>Asana â 11 overdue tasks:</strong> 3 URGENT renewal tasks (Beem It, SKY TV, BOQ) due yesterday. 8 older items ranging from FebâApr. Triage and close or reschedule.</li>
-      <li><span class="dot amber"></span><strong>SafetyCulture expansion pitch</strong> â Asana task due tomorrow (18 Apr). Draft needed today.</li>
-      <li><span class="dot amber"></span><strong>Mater Foundation MAU investigation</strong> â Asana task due tomorrow (18 Apr). Start analysis today.</li>
-      <li><span class="dot blue"></span><strong>Ferocia dashboards</strong> â 3 starter dashboards due 20 Apr. Ensure onboarding funnel, HUAM referral, and payment conversion are ready.</li>
-    </ul>
-  </div>
-
-  <!-- EOD WRAP-UP -->
-  <div class="section">
-    <h2>End-of-Day Wrap-Up</h2>
-    <div class="meta">Updated: Fri 17 Apr 2026, 10:30 AEST â preview for today</div>
-    <ul>
-      <li><span class="dot blue"></span><strong>AI Week Day 5:</strong> Final day â mandatory APJ Demo Session at 3pm. Prepare 3-min overview of skills built this week.</li>
-      <li><span class="dot amber"></span><strong>Carry forward:</strong> BOQ save plan discussion with Richard. Beem It EBR scheduling. SKY TV renewal positioning.</li>
-      <li><span class="dot amber"></span><strong>Carry forward:</strong> SafetyCulture expansion pitch draft. Mater Foundation MAU decline investigation.</li>
-      <li><span class="dot grey"></span><strong>Overdue backlog:</strong> 8 tasks from FebâApr need triaging â reschedule or close. Clear the deck before next week.</li>
-      <li><span class="dot green"></span><strong>Lendi follow-up:</strong> Action items from Tue 15 Apr call with Adam Craig â send SDK spec, confirm success metrics.</li>
-    </ul>
-  </div>
-
-  <!-- FRIDAY WEEKLY WRAP-UP -->
-  <div class="section full">
-    <h2>Friday Weekly Wrap-Up</h2>
-    <div class="meta">Updated: Fri 17 Apr 2026, 10:30 AEST</div>
-    <ul>
-      <li><span class="dot green"></span><strong>Wins:</strong> ANZ QBR (ENT) completed Sun 13 Apr with full leadership team. Lendi use-case clarification call landed well. APJ AI Week participation all week.</li>
-      <li><span class="dot green"></span><strong>Wins:</strong> Linktree sync with Nick T completed. Ferocia project planning with Simon progressed. RSL Queensland sync with Teresa Breslin held.</li>
-      <li><span class="dot red"></span><strong>Gaps:</strong> 3 urgent April 30 renewals (BOQ, Beem It, SKY TV) still need action plans finalised. Only 13 days remaining.</li>
-      <li><span class="dot amber"></span><strong>Gaps:</strong> 11 Asana tasks overdue. Jumbo Interactive EBR overdue by 16 months. Mater MAU decline uninvestigated.</li>
-      <li><span class="dot blue"></span><strong>Next week preview:</strong> SafetyCulture expansion pitch (due 18 Apr). Mater MAU investigation (due 18 Apr). Ferocia dashboards (due 20 Apr). Up Bank North Star metric (due 30 Apr).</li>
-      <li><span class="dot blue"></span><strong>Next week preview:</strong> Finalise all 3 April-30 renewal positions. Clear overdue Asana backlog. Schedule Jumbo Interactive EBR.</li>
-    </ul>
-  </div>
-
-  <!-- MONDAY WEEKLY REVIEW -->
-  <div class="section full">
-    <h2>Monday Weekly Review</h2>
-    <div class="meta">Last updated: Monday 14 Apr 2026</div>
-    <ul>
-      <li><span class="dot grey"></span>This section is updated on Mondays only. Content from last Monday's review is preserved below.</li>
-      <li><span class="dot blue"></span><strong>Week of 14 Apr focus:</strong> AI Week activities. Lendi use-case clarification. ANZ QBR follow-ups. April-30 renewal preparation (BOQ, Beem It, SKY TV).</li>
-      <li><span class="dot amber"></span><strong>Pipeline health:</strong> 15 accounts across Critical/High/Medium risk tiers. 3 renewals within 13 days. Total at-risk ARR approximately $2.9M.</li>
-      <li><span class="dot green"></span><strong>Upsell pipeline:</strong> 8 accounts with expansion signals. Top opportunities: Wesfarmers ($2.89M tpARR), SKY TV ($1.94M tpARR), PlaceIt ($760K tpARR), Beem It ($628K tpARR).</li>
-    </ul>
-    <p class="muted-note">(Last updated: Monday 14 Apr 2026)</p>
-  </div>
-
-</div>
-
 <script>
-  // Auto-refresh hint
-  const data = window.__DASHBOARD_DATA;
-  if (data) {
-    document.querySelector('.header .ts').textContent =
-      'Last consolidated: ' + new Date(data.consolidatedAt).toLocaleString('en-AU', {
-        weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
-        hour: '2-digit', minute: '2-digit', timeZone: 'Australia/Melbourne'
-      }) + ' AEST';
-  }
-</script>
+(function() {
+  const d = window.__DASHBOARD_DATA;
+  if (!d) return;
 
+  // Timestamp
+  const ts = new Date(d.consolidatedAt);
+  document.getElementById('timestamp').textContent = 'Last consolidated: ' + ts.toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+  // Stats
+  const statsEl = document.getElementById('stats');
+  const statsDef = [
+    { key: 'atRisk', label: 'At-Risk Accounts', cls: 'risk' },
+    { key: 'openItems', label: 'Open Items', cls: 'open' },
+    { key: 'upsell', label: 'Upsell Signals', cls: 'upsell' },
+    { key: 'meetings', label: 'Meetings Today', cls: 'meetings' }
+  ];
+  statsDef.forEach(function(s) {
+    const card = document.createElement('div');
+    card.className = 'stat-card ' + s.cls;
+    card.innerHTML = '<div class="value">' + d.stats[s.key] + '</div><div class="label">' + s.label + '</div>';
+    statsEl.appendChild(card);
+  });
+
+  // Sections
+  const sectionsEl = document.getElementById('sections');
+  const sectionDef = [
+    { id: 'morning-briefing', title: 'Morning Briefing', icon: '\u2600\uFE0F' },
+    { id: 'inbox-triage', title: 'Inbox Triage', icon: '\uD83D\uDCE8' },
+    { id: 'eod-wrap-up', title: 'EOD Wrap-Up', icon: '\uD83C\uDF19' },
+    { id: 'monday-weekly-review', title: 'Monday Weekly Review', icon: '\uD83D\uDCC5' },
+    { id: 'friday-weekly-wrap-up', title: 'Friday Weekly Wrap-Up', icon: '\uD83C\uDFC1', fullWidth: true }
+  ];
+  sectionDef.forEach(function(sec) {
+    var task = d.tasks[sec.id];
+    if (!task) return;
+    var div = document.createElement('div');
+    div.className = 'section' + (sec.fullWidth ? ' full-width' : '');
+    var lr = task.lastRun ? new Date(task.lastRun).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Unknown';
+    div.innerHTML = '<h2>' + sec.icon + ' ' + sec.title + '</h2><div class="last-run">Last run: ' + lr + '</div>' + task.html;
+    sectionsEl.appendChild(div);
+  });
+})();
+</script>
 </body>
 </html>
