@@ -8,132 +8,150 @@
   :root {
     --bg: #0f1117;
     --card: #1a1d27;
-    --border: #2a2d3a;
+    --card-border: #2a2d3a;
     --text: #e4e4e7;
-    --muted: #9ca3af;
+    --text-muted: #9ca3af;
     --accent: #6366f1;
     --red: #ef4444;
     --amber: #f59e0b;
     --green: #22c55e;
     --blue: #3b82f6;
+    --purple: #a855f7;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 24px; }
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .header { padding: 24px 32px 16px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
   .header h1 { font-size: 22px; font-weight: 600; }
-  .header .ts { color: var(--muted); font-size: 13px; }
-  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .stat-card .value { font-size: 36px; font-weight: 700; }
-  .stat-card .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .stat-card.risk .value { color: var(--red); }
-  .stat-card.open .value { color: var(--amber); }
-  .stat-card.upsell .value { color: var(--green); }
-  .stat-card.meetings .value { color: var(--blue); }
-  .sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .header h1 span { color: var(--accent); }
+  .header .meta { font-size: 13px; color: var(--text-muted); text-align: right; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px 32px; }
+  .stat-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; }
+  .stat-card .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .stat-card .value { font-size: 32px; font-weight: 700; }
+  .stat-card .value.red { color: var(--red); }
+  .stat-card .value.amber { color: var(--amber); }
+  .stat-card .value.green { color: var(--green); }
+  .stat-card .value.blue { color: var(--blue); }
+  .stat-card .value.purple { color: var(--purple); }
+  .sections { padding: 8px 32px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .section { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 24px; }
   .section.full-width { grid-column: 1 / -1; }
-  .section h2 { font-size: 15px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-  .section .last-run { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
-  .section ul { list-style: none; padding: 0; }
-  .section li { padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
+  .section h2 { font-size: 15px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section h2 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .section h2 .dot.live { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .section h2 .dot.stale { background: var(--text-muted); }
+  .section ul { list-style: none; }
+  .section li { padding: 6px 0; font-size: 14px; line-height: 1.5; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 8px; }
   .section li:last-child { border-bottom: none; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-  .dot.red { background: var(--red); }
-  .dot.amber { background: var(--amber); }
-  .dot.green { background: var(--green); }
-  .dot.blue { background: var(--blue); }
-  .dot.grey { background: #6b7280; }
-  .badge { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 11px; font-weight: 500; }
-  .badge.critical { background: rgba(239,68,68,0.15); color: var(--red); }
-  .badge.high { background: rgba(245,158,11,0.15); color: var(--amber); }
-  .badge.upsell { background: rgba(34,197,94,0.15); color: var(--green); }
-  .stale-note { color: var(--muted); font-style: italic; font-size: 12px; }
-  @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .sections { grid-template-columns: 1fr; } }
+  .section li .icon { flex-shrink: 0; width: 18px; text-align: center; font-size: 13px; margin-top: 2px; }
+  .section .stale-note { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 8px; }
+  .tag { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 600; margin-left: 4px; }
+  .tag.critical { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag.high { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .tag.medium { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag.low { background: rgba(34,197,94,0.15); color: var(--green); }
+  .tag.overdue { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag.upsell { background: rgba(168,85,247,0.15); color: var(--purple); }
+  .tag.renewal { background: rgba(245,158,11,0.2); color: var(--amber); }
+  @media (max-width: 800px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .sections { grid-template-columns: 1fr; }
+    .section.full-width { grid-column: 1; }
+  }
 </style>
 </head>
 <body>
+
 <div class="header">
-  <h1>CSM Command Centre</h1>
-  <span class="ts" id="timestamp"></span>
+  <h1><span>&#9632;</span> CSM Command Centre</h1>
+  <div class="meta">
+    <div>Santi Perez Â· APJ CS</div>
+    <div id="timestamp"></div>
+  </div>
 </div>
-<div class="stats-grid" id="stats"></div>
-<div class="sections" id="sections"></div>
 
 <!-- __DASHBOARD_DATA_START__ -->
 <script>
 window.__DASHBOARD_DATA = {
-  "consolidatedAt": "2026-04-21T09:30:00+10:00",
-  "stats": { "atRisk": 8, "openItems": 27, "upsell": 8, "meetings": 4 },
+  "consolidatedAt": "2026-04-23T09:45:00+10:00",
+  "stats": { "atRisk": 12, "openItems": 17, "upsell": 8, "meetings": 6 },
   "tasks": {
     "morning-briefing": {
-      "lastRun": "2026-04-21T09:30:00+10:00",
-      "html": "<ul><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>SKY Network Television</b> â $146.9K ARR, renewal <b>30 Apr</b> (9 days). Single product (Analytics). tpARR whitespace $1.94M. Prep Session Replay cross-sell narrative.</li><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>Bank of Queensland</b> â $74K ARR, renewal <b>30 Apr</b> (9 days). Analytics + Web Exp. North Star metric discussion needed across all six brands.</li><li><span class='dot red'></span><span class='badge high'>HIGH</span> <b>Beem It</b> â $70.2K ARR, renewal <b>30 Apr</b> (9 days). Outlook: Upsell. Analytics only, tpARR $628K.</li><li><span class='dot amber'></span><span class='badge high'>HIGH</span> <b>Jumbo Interactive</b> â $190K ARR, renewal <b>31 May</b>. Order form going to Deal Desk (6-month at $85K churn).</li><li><span class='dot amber'></span><span class='badge high'>HIGH</span> <b>Mater Foundation</b> â $71.2K ARR, renewal <b>31 May</b>. MAU declining (-7%). Multi-product but shallow. Investigate decline.</li><li><span class='dot red'></span><span class='badge critical'>CRITICAL</span> <b>Eucalyptus</b> â $77.6K ARR, renewal Feb 2027. <b>RED health.</b> Only 5 MAUs. PS catchup today at 3 PM.</li><li><span class='dot green'></span><b>Today's meetings:</b> VGW Contract Review (1:30 PM) Â· ANZ POD (2:30 PM) Â· Eucalyptus PS (3 PM) Â· Qi 1:1 (4 PM)</li><li><span class='dot green'></span><span class='badge upsell'>UPSELL</span> signals on: Beem It, Lendi, Dabble, OnePass, SafetyCulture, PlaceIt, VGW, Zip Co</li></ul>"
+      "lastRun": "2026-04-23T09:45:00+10:00",
+      "html": "<ul><li><span class='icon'>ð´</span><b>SKY Network TV</b> â renewal 30 Apr (7 days), $146.9K ARR, single-blade Analytics <span class='tag critical'>CRITICAL</span><span class='tag renewal'>RENEWAL</span></li><li><span class='icon'>ð´</span><b>Bank of Queensland</b> â renewal 30 Apr (7 days), $74K ARR, expansion pitch in progress <span class='tag high'>HIGH</span><span class='tag renewal'>RENEWAL</span></li><li><span class='icon'>ð´</span><b>Beem It</b> â renewal 30 Apr (7 days), $70.2K ARR, SE just assigned (Jamie Lim) <span class='tag high'>HIGH</span><span class='tag renewal'>RENEWAL</span></li><li><span class='icon'>ð </span><b>Jumbo Interactive</b> â renewal 31 May, $190K ARR, $730K tpARR whitespace, meeting today at 3pm <span class='tag high'>HIGH</span></li><li><span class='icon'>ð </span><b>Mater Foundation</b> â renewal 31 May, $71.2K ARR, MAU declining (-7%), needs re-engagement plan <span class='tag high'>HIGH</span></li><li><span class='icon'>ð¡</span><b>PlaceIt</b> â two Closed Lost reports yesterday (Expand Horizontal + Vertical) <span class='tag critical'>CRITICAL</span></li><li><span class='icon'>ð</span><b>Envato</b> â experimentation tech sync today 2pm; pricing thread active with Heeren</li><li><span class='icon'>ð</span><b>BOQ</b> â Andy Clifford viewed Spekit Deal Room; mobile North Star metric due 30 Apr</li></ul>"
     },
     "eod-wrap-up": {
-      "lastRun": "2026-04-21T09:30:00+10:00",
-      "html": "<ul><li><span class='dot blue'></span><b>Pending for today:</b> VGW contract review â prepare pricing model walkthrough &amp; usage trends for Nick Rutherford</li><li><span class='dot blue'></span>Eucalyptus PS sync â address RED health, only 5 MAUs, push for re-engagement</li><li><span class='dot blue'></span>ANZ POD â review current deals in flight, CQ renewals, existing customer activity</li><li><span class='dot amber'></span><b>Carry forward:</b> Lendi workshop (placeholder for Wed 22 Apr 2 PM). Confirm Jamie as SE.</li><li><span class='dot amber'></span>Dabble sync with Fergus &amp; Hamish this week â align on KPIs</li><li><span class='dot amber'></span>SafetyCulture â schedule consultative data architecture call with Chi (CSA) &amp; Jamie</li><li><span class='dot amber'></span>RSL Queensland â Teresa to respond on team availability by Wed 23 Apr</li><li><span class='dot grey'></span>Brisbane trip planning (May 6â8): Intent, RSL, Jumbo, BOQ. Confirm logistics.</li></ul>"
+      "lastRun": "2026-04-23T09:45:00+10:00",
+      "html": "<ul><li><span class='icon'>ð</span><b>Today's meetings:</b> Ferocia identity resolution (11am), Richard sync (1pm), Envato Experimentation (2pm), APJ CSM connect (3pm), Jumbo (3pm), VGW weekly (4:30pm)</li><li><span class='icon'>ð</span><b>Granola action items:</b> Coordinate with Chi on Lendi PSP sessions; follow up on RSLQ dashboard duplication; check global agent context limit</li><li><span class='icon'>â ï¸</span><b>Gaps to close:</b> SKY TV renewal positioning overdue (due 16 Apr); SafetyCulture expansion pitch overdue (due 18 Apr); Mater Foundation MAU investigation overdue (due 18 Apr)</li><li><span class='icon'>ð</span><b>Carry forward:</b> 12 overdue Asana tasks â oldest is Lendi SDK spec (Mar 2025); Ferocia dashboards (due 20 Apr); AI Chat demo for CultureAmp (due 30 Apr)</li></ul>"
     },
     "inbox-triage": {
-      "lastRun": "2026-04-21T09:30:00+10:00",
-      "html": "<ul><li><span class='dot red'></span><b>Slack â Jamie Lim:</b> Asking if VGW engagement is aligned with Heeren's PSP engagement or separate. <b>Reply needed.</b></li><li><span class='dot red'></span><b>Slack â Qi Wang:</b> Asking about pushing Eucalyptus training to next week. <b>Reply needed.</b></li><li><span class='dot amber'></span><b>Slack â Edwina Paul (VGW):</b> Shared training agenda details â post-click behaviour, funnel deep-dives. Review before 1:30 PM meeting.</li><li><span class='dot amber'></span><b>Slack â Billy Perrier (RSL):</b> Thursday only option for in-office visit. Teresa sorting attendance. Lunch offer.</li><li><span class='dot amber'></span><b>Slack â Ritwik:</b> Starting Envato handover. Met Endeavour Dec, Mater recently. Checking Endeavour availability.</li><li><span class='dot grey'></span><b>Gmail:</b> Data unavailable â connector requires reload.</li><li><span class='dot amber'></span><b>Asana:</b> 12 overdue tasks. Highest priority: SKY TV renewal (due 16 Apr), SafetyCulture expansion (due 18 Apr), Mater MAU investigation (due 18 Apr), Ferocia dashboards (due 20 Apr).</li></ul>"
+      "lastRun": "2026-04-23T09:45:00+10:00",
+      "html": "<ul><li><span class='icon'>ð§</span><b>Zendesk #393235</b> â customer says no update received; Qi CC'd; needs follow-up <span class='tag overdue'>ACTION</span></li><li><span class='icon'>ð§</span><b>Entain weekly PS</b> â Qi rescheduled to next Tuesday (Jeni on urgent work)</li><li><span class='icon'>ð§</span><b>Envato pricing thread</b> â Lance asking for current vs new agreement summary; Heeren handling</li><li><span class='icon'>ð§</span><b>Beem It SE assigned</b> â Jamie Lim assigned as SE for renewal + expand opportunity</li><li><span class='icon'>ð§</span><b>PlaceIt Closed Lost x2</b> â Heeren reports both Expand opps closed lost 21 Apr</li><li><span class='icon'>ð§</span><b>RSLQ meeting notes</b> â Qi sent follow-up from bi-weekly PS catchup (22 Apr)</li><li><span class='icon'>ð§</span><b>CS Enablement Roadmap</b> â Jenna Elliott: role guides, CEM + what's ahead</li><li><span class='icon'>ð</span><b>12 overdue Asana tasks</b> â oldest: Lendi SDK spec (Mar 2025); 3 tasks due this week <span class='tag overdue'>OVERDUE</span></li></ul>"
     },
     "monday-weekly-review": {
-      "lastRun": "2026-04-20T09:00:00+10:00",
-      "html": "<ul><li class='stale-note'>(Last updated: Monday 20 April 2026)</li><li><span class='dot amber'></span><b>Week in review:</b> 3 imminent renewals (SKY, BOQ, Beem It) all due 30 Apr. Combined ARR at risk: $291K.</li><li><span class='dot green'></span>Jumbo order form submitted to Deal Desk (6-month renewal at $85K churn reduction).</li><li><span class='dot green'></span>Lendi workshop placeholder locked â Mon or Wed, 2 PM.</li><li><span class='dot amber'></span>20-account audit target set for this week â stakeholder connections, use cases, outcomes, cadence.</li><li><span class='dot blue'></span>Brisbane trip (May 6â8) confirmed: Intent (full day Wed), RSL + Jumbo (Thu), BOQ (Fri AM).</li><li><span class='dot amber'></span>David on leave from 22 Apr for 2 weeks. Jamie leading coordination. Flybys prep &amp; Kmart SE engagement.</li><li><span class='dot green'></span>APJ AI Week leadership follow-up session scheduled. Awards &amp; recognition incoming.</li></ul>"
+      "lastRun": "2026-04-21T08:00:00+10:00",
+      "html": "<ul><li><span class='icon'>ð</span>Past 7 days: RSLQ moved to monthly catchups; Braze integration going live ahead of Jumbo platform (Aug 15)</li><li><span class='icon'>ð</span>PlaceIt: both Expand opportunities closed lost â need to reassess account strategy</li><li><span class='icon'>â</span>VGW: team given 1-2 weeks to explore platform; Braze integration conversation pending with Agata</li><li><span class='icon'>ð</span>Lendi: Richard approved 2-3 PSP sessions even without signed PSP contract</li><li><span class='icon'>â ï¸</span>Easy Agile: retention offer to be presented; max 20K risk if rejected</li><li><span class='icon'>ð§¹</span>Envato/PlaceIt account cleanup needed â Envato under Ritwik, PlaceIt under Santiago</li></ul>"
     },
     "friday-weekly-wrap-up": {
-      "lastRun": "2026-04-17T17:00:00+10:00",
-      "html": "<ul><li class='stale-note'>(Last updated: Friday 18 April 2026)</li><li><span class='dot green'></span><b>Wins:</b> Lendi workshop date locked. Jumbo order form progressing. VGW contract review scheduled.</li><li><span class='dot amber'></span><b>Gaps:</b> SKY TV renewal positioning still incomplete. Mater MAU decline uninvestigated. Ferocia dashboards not started.</li><li><span class='dot blue'></span><b>Next week preview:</b> VGW contract review Tue. Eucalyptus PS sync. Lendi workshop. Dabble KPI alignment. Brisbane trip logistics.</li><li><span class='dot amber'></span>SafetyCulture expansion pitch overdue â draft before Brisbane trip.</li><li><span class='dot grey'></span>Linktree â partial churn outlook. Enablement sessions on hold until Catherine returns.</li></ul>"
+      "lastRun": "2026-04-18T17:00:00+10:00",
+      "html": "<ul><li><span class='icon'>â</span>No Friday wrap-up data available for the current week yet.</li><li><span class='icon'>â</span>This section will be updated on Friday 24 April.</li></ul>"
     }
   }
 };
 </script>
 <!-- __DASHBOARD_DATA_END__ -->
 
+<div class="stats-row" id="stats-row"></div>
+<div class="sections" id="sections"></div>
+
 <script>
 (function() {
-  const d = window.__DASHBOARD_DATA;
-  if (!d) return;
+  const data = window.__DASHBOARD_DATA;
+  if (!data) return;
 
   // Timestamp
-  const ts = new Date(d.consolidatedAt);
-  document.getElementById('timestamp').textContent = 'Last consolidated: ' + ts.toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const ts = new Date(data.consolidatedAt);
+  document.getElementById('timestamp').textContent = 'Updated: ' + ts.toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'medium', timeStyle: 'short' });
 
   // Stats
-  const statsEl = document.getElementById('stats');
-  const statsDef = [
-    { key: 'atRisk', label: 'At-Risk Accounts', cls: 'risk' },
-    { key: 'openItems', label: 'Open Items', cls: 'open' },
-    { key: 'upsell', label: 'Upsell Signals', cls: 'upsell' },
-    { key: 'meetings', label: 'Meetings Today', cls: 'meetings' }
+  const statsEl = document.getElementById('stats-row');
+  const stats = [
+    { label: 'At-Risk Accounts', value: data.stats.atRisk, color: 'red' },
+    { label: 'Open Items', value: data.stats.openItems, color: 'amber' },
+    { label: 'Upsell Signals', value: data.stats.upsell, color: 'purple' },
+    { label: 'Meetings Today', value: data.stats.meetings, color: 'blue' }
   ];
-  statsDef.forEach(function(s) {
+  stats.forEach(s => {
     const card = document.createElement('div');
-    card.className = 'stat-card ' + s.cls;
-    card.innerHTML = '<div class="value">' + d.stats[s.key] + '</div><div class="label">' + s.label + '</div>';
+    card.className = 'stat-card';
+    card.innerHTML = '<div class="label">' + s.label + '</div><div class="value ' + s.color + '">' + s.value + '</div>';
     statsEl.appendChild(card);
   });
 
   // Sections
+  const sectionMeta = {
+    'morning-briefing': { title: 'Morning Briefing', live: true },
+    'inbox-triage': { title: 'Inbox Triage', live: true },
+    'eod-wrap-up': { title: 'End-of-Day Wrap-Up', live: true },
+    'monday-weekly-review': { title: 'Weekly Review (Monday)', live: false },
+    'friday-weekly-wrap-up': { title: 'Weekly Wrap-Up (Friday)', live: false }
+  };
+
+  const order = ['morning-briefing', 'inbox-triage', 'eod-wrap-up', 'monday-weekly-review', 'friday-weekly-wrap-up'];
   const sectionsEl = document.getElementById('sections');
-  const sectionDef = [
-    { id: 'morning-briefing', title: 'Morning Briefing', icon: '\u2600\uFE0F' },
-    { id: 'inbox-triage', title: 'Inbox Triage', icon: '\uD83D\uDCE8' },
-    { id: 'eod-wrap-up', title: 'EOD Wrap-Up', icon: '\uD83C\uDF19' },
-    { id: 'monday-weekly-review', title: 'Monday Weekly Review', icon: '\uD83D\uDCC5' },
-    { id: 'friday-weekly-wrap-up', title: 'Friday Weekly Wrap-Up', icon: '\uD83C\uDFC1', fullWidth: true }
-  ];
-  sectionDef.forEach(function(sec) {
-    var task = d.tasks[sec.id];
-    if (!task) return;
-    var div = document.createElement('div');
-    div.className = 'section' + (sec.fullWidth ? ' full-width' : '');
-    var lr = task.lastRun ? new Date(task.lastRun).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Unknown';
-    div.innerHTML = '<h2>' + sec.icon + ' ' + sec.title + '</h2><div class="last-run">Last run: ' + lr + '</div>' + task.html;
-    sectionsEl.appendChild(div);
+
+  order.forEach((key, i) => {
+    const task = data.tasks[key];
+    const meta = sectionMeta[key];
+    const sec = document.createElement('div');
+    sec.className = 'section' + (i >= 3 ? '' : '');
+    const dotClass = meta.live ? 'live' : 'stale';
+    const lastRun = task.lastRun ? new Date(task.lastRun).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'short', timeStyle: 'short' }) : 'N/A';
+    sec.innerHTML = '<h2><span class="dot ' + dotClass + '"></span>' + meta.title + '</h2>' + task.html + '<div class="stale-note">Last run: ' + lastRun + '</div>';
+    sectionsEl.appendChild(sec);
   });
 })();
 </script>
+
 </body>
 </html>
