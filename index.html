@@ -7,162 +7,211 @@
 <style>
   :root {
     --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface-hover: #222632;
-    --border: #2a2e3b;
-    --text: #e4e6ed;
-    --text-muted: #8b8fa3;
-    --accent: #6c5ce7;
-    --red: #ff6b6b;
-    --amber: #ffa94d;
-    --green: #51cf66;
-    --blue: #339af0;
-    --purple: #9775fa;
+    --card: #1a1d27;
+    --card-border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-muted: #8b8d98;
+    --accent: #6366f1;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --green: #22c55e;
+    --blue: #3b82f6;
+    --purple: #a855f7;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; padding: 20px; }
-  .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
-  .header h1 { font-size:1.5rem; font-weight:600; }
-  .header .meta { color:var(--text-muted); font-size:0.85rem; }
-  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
-  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
-  .stat-card .value { font-size:2rem; font-weight:700; }
-  .stat-card .label { color:var(--text-muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; margin-top:4px; }
-  .stat-card.red .value { color:var(--red); }
-  .stat-card.amber .value { color:var(--amber); }
-  .stat-card.green .value { color:var(--green); }
-  .stat-card.blue .value { color:var(--blue); }
-  .sections { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .section { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; }
-  .section.full-width { grid-column: 1 / -1; }
-  .section h2 { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
-  .section h2 .icon { width:20px; height:20px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem; }
-  .section .last-run { color:var(--text-muted); font-size:0.75rem; margin-bottom:12px; }
-  .section ul { list-style:none; padding:0; }
-  .section li { padding:6px 0; border-bottom:1px solid var(--border); font-size:0.88rem; display:flex; align-items:flex-start; gap:8px; }
-  .section li:last-child { border-bottom:none; }
-  .section li .dot { width:8px; height:8px; border-radius:50%; margin-top:6px; flex-shrink:0; }
-  .dot.red { background:var(--red); }
-  .dot.amber { background:var(--amber); }
-  .dot.green { background:var(--green); }
-  .dot.blue { background:var(--blue); }
-  .dot.purple { background:var(--purple); }
-  .tag { display:inline-block; padding:1px 6px; border-radius:4px; font-size:0.7rem; font-weight:600; margin-left:4px; }
-  .tag.critical { background:rgba(255,107,107,0.15); color:var(--red); }
-  .tag.high { background:rgba(255,169,77,0.15); color:var(--amber); }
-  .tag.medium { background:rgba(51,154,240,0.15); color:var(--blue); }
-  .tag.upsell { background:rgba(81,207,102,0.15); color:var(--green); }
-  .tag.info { background:rgba(151,117,250,0.15); color:var(--purple); }
-  @media (max-width:768px) { .stats-grid { grid-template-columns:repeat(2,1fr); } .sections { grid-template-columns:1fr; } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .header { padding: 24px 32px 16px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header .meta { font-size: 13px; color: var(--text-muted); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 20px 32px; }
+  .stat-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 20px; }
+  .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 6px; }
+  .stat-card .value { font-size: 32px; font-weight: 700; }
+  .stat-card .value.red { color: var(--red); }
+  .stat-card .value.amber { color: var(--amber); }
+  .stat-card .value.green { color: var(--green); }
+  .stat-card .value.blue { color: var(--blue); }
+  .stat-card .value.purple { color: var(--purple); }
+  .sections { padding: 8px 32px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }
+  .section { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; }
+  .section-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 15px; font-weight: 600; }
+  .section-header .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(99,102,241,0.15); color: var(--accent); }
+  .section-body { padding: 14px 20px 18px; max-height: 480px; overflow-y: auto; }
+  .section-body ul { list-style: none; }
+  .section-body li { padding: 8px 0; border-bottom: 1px solid rgba(42,45,58,0.5); font-size: 13.5px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .section-body li:last-child { border-bottom: none; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .dot.red { background: var(--red); }
+  .dot.amber { background: var(--amber); }
+  .dot.green { background: var(--green); }
+  .dot.blue { background: var(--blue); }
+  .dot.purple { background: var(--purple); }
+  .dot.grey { background: var(--text-muted); }
+  .tag { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 600; margin-left: 4px; }
+  .tag.critical { background: rgba(239,68,68,0.18); color: var(--red); }
+  .tag.high { background: rgba(245,158,11,0.18); color: var(--amber); }
+  .tag.upsell { background: rgba(34,197,94,0.18); color: var(--green); }
+  .tag.info { background: rgba(59,130,246,0.18); color: var(--blue); }
+  strong { color: #fff; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .section-body::-webkit-scrollbar { width: 4px; }
+  .section-body::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+  @media (max-width: 900px) { .sections { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>CSM Command Centre</h1>
-  <div class="meta">Santi Perez · ANZ CS · Updated Tue 28 Apr 2026, 09:30 AEST</div>
+  <h1><span>CSM</span> Command Centre</h1>
+  <div class="meta">Santi Perez · APJ Customer Success · Last updated: Wed 29 Apr 2026, 09:30 AEST</div>
 </div>
 
 <!-- __DASHBOARD_DATA_START__ -->
 <script>
 window.__DASHBOARD_DATA = {
-  "consolidatedAt": "2026-04-28T09:30:00+10:00",
-  "stats": { "atRisk": 7, "openItems": 43, "upsell": 6, "meetings": 9 },
+  "consolidatedAt": "2026-04-29T09:30:00+10:00",
+  "stats": { "atRisk": 7, "openItems": 35, "upsell": 6, "meetings": 7 },
   "tasks": {
-    "morning-briefing": { "lastRun": "2026-04-28T09:30:00+10:00", "html": "<ul><li class=\"red\"><strong>Beem It<\/strong> \u2014 $70.2K, renews 30 Apr (2 days!). 48 days no contact, utilisation 31%. <span class=\"tag red\">CRITICAL<\/span><\/li><li class=\"red\"><strong>BOQ<\/strong> \u2014 $74K, renews 30 Apr. Utilisation 25.2%, 5 MAUs. Stage 5 + $5.9K uplift. <span class=\"tag red\">CRITICAL<\/span><\/li><li class=\"red\"><strong>OneDigital<\/strong> \u2014 $54.9K, 0.1% utilisation, 100% churn predicted. <span class=\"tag red\">CRITICAL<\/span><\/li><li class=\"amber\"><strong>SKY Network<\/strong> \u2014 $146.9K, renews 30 Apr. Stage 6, signature + $11.8K uplift. <span class=\"tag amber\">HIGH<\/span><\/li><li class=\"amber\"><strong>Jumbo<\/strong> \u2014 $190K, $85K partial churn. Renews 22 May. Workshop 7 May. <span class=\"tag amber\">HIGH<\/span><\/li><li class=\"amber\"><strong>Easy Agile<\/strong> \u2014 $86.4K, MAU -64%. Renews 30 Jun. <span class=\"tag amber\">HIGH<\/span><\/li><li class=\"amber\"><strong>Mater<\/strong> \u2014 $71.2K, MAU -20%. Renews 31 May. Vashti replied. <span class=\"tag amber\">HIGH<\/span><\/li><li class=\"blue\"><strong>Today (9 meetings)<\/strong>: Dabble (10:00), Entain PS (10:30), Qi 1:1 (13:00), VGW contract (13:00), Dabble PS (14:00), Eucalyptus (15:00), APJ CSM (15:00), Lendi (15:30)<\/li><\/ul>" },
-    "eod-wrap-up": { "lastRun": "2026-04-28T09:30:00+10:00", "html": "<ul><li class=\"blue\">EOD wrap-up populates after 17:00 AEST<\/li><li class=\"muted\"><strong>Carry forward<\/strong>: Speak with Richard re Chi concerns (VGW). Edwina CRO feedback.<\/li><li class=\"muted\">Chase Envato questionnaire \u2014 overdue from Fri 24 Apr<\/li><li class=\"muted\">Reply CultureAmp \u2014 Naomi waiting on May dates<\/li><li class=\"muted\">Reply Mark Drasutis re Meera<\/li><li class=\"muted\">Respond Endeavour (Therese) \u2014 confirm Thu 7 May<\/li><\/ul>" },
-    "inbox-triage": { "lastRun": "2026-04-28T09:30:00+10:00", "html": "<ul><li class=\"red\"><strong>Email<\/strong>: Endeavour \u2014 Therese asking Thu 7 May timing.<\/li><li class=\"red\"><strong>Email<\/strong>: Mater \u2014 Vashti wants to schedule next week.<\/li><li class=\"amber\"><strong>Email<\/strong>: BOQ \u2014 James Hamilton AI Agent bug.<\/li><li class=\"amber\"><strong>Slack<\/strong>: Mark Drasutis re Meera.<\/li><li class=\"muted\"><strong>Email<\/strong>: Zendesk #392940 colour palette (monitor).<\/li><li class=\"blue\"><strong>Asana<\/strong>: 38+ overdue. Priority: BOQ, Beem It, SKY, Envato.<\/li><\/ul>" },
-    "monday-weekly-review": { "lastRun": "2026-04-27T09:00:00+10:00", "html": "<ul><li class=\"muted\">(Last updated: Monday 27 Apr)<\/li><li class=\"red\">3 renewals this week: Beem It, BOQ, SKY ($291K ARR)<\/li><li class=\"amber\">Jumbo $85K partial churn in negotiation<\/li><li class=\"green\">Envato tech sync completed \u2014 preferred vendor<\/li><li class=\"green\">VGW CRO training delivered<\/li><li class=\"blue\">Endeavour handover \u2014 7 May<\/li><li class=\"blue\">Mater \u2014 Vashti replied<\/li><\/ul>" },
-    "friday-weekly-wrap-up": { "lastRun": "2026-04-25T17:00:00+10:00", "html": "<ul><li class=\"muted\">(Last updated: Friday 25 Apr)<\/li><li class=\"green\"><strong>Wins<\/strong>: Envato sync, VGW training, Endeavour handover<\/li><li class=\"amber\"><strong>Gaps<\/strong>: Beem It no contact, Envato questionnaire, CultureAmp dates<\/li><li class=\"blue\"><strong>Next week<\/strong>: 3 renewals closing, VGW contract, Lendi workshop<\/li><\/ul>" }
+    "morning-briefing": { "lastRun": "2026-04-29T09:30:00+10:00", "html": "morning-briefing" },
+    "eod-wrap-up": { "lastRun": "2026-04-28T18:00:00+10:00", "html": "eod-wrap-up" },
+    "inbox-triage": { "lastRun": "2026-04-29T09:30:00+10:00", "html": "inbox-triage" },
+    "monday-weekly-review": { "lastRun": "2026-04-28T09:00:00+10:00", "html": "monday-weekly-review" },
+    "friday-weekly-wrap-up": { "lastRun": "2026-04-25T17:00:00+10:00", "html": "friday-weekly-wrap-up" }
   }
 };
 </script>
 <!-- __DASHBOARD_DATA_END__ -->
 
-<div class="stats-grid">
-  <div class="stat-card red"><div class="value">7</div><div class="label">At-Risk Accounts</div></div>
-  <div class="stat-card amber"><div class="value">43</div><div class="label">Open Items</div></div>
-  <div class="stat-card green"><div class="value">6</div><div class="label">Upsell Signals</div></div>
-  <div class="stat-card blue"><div class="value">9</div><div class="label">Meetings Today</div></div>
+<div class="stats">
+  <div class="stat-card"><div class="label">At-Risk Accounts</div><div class="value red">7</div></div>
+  <div class="stat-card"><div class="label">Open Items</div><div class="value amber">35</div></div>
+  <div class="stat-card"><div class="label">Upsell Signals</div><div class="value green">6</div></div>
+  <div class="stat-card"><div class="label">Meetings Today</div><div class="value blue">7</div></div>
 </div>
 
 <div class="sections">
 
-  <!-- MORNING BRIEFING -->
   <div class="section">
-    <h2><span class="icon" style="background:var(--amber);">☀</span> Morning Briefing</h2>
-    <div class="last-run">Mon 27 Apr 2026, 09:30 AEST</div>
-    <ul>
-      <li><span class="dot red"></span><b>Beem It</b> — $70.2K, renews 30 Apr (3 days). 44 days no contact, MAU -42%. <span class="tag critical">CRITICAL</span></li>
-      <li><span class="dot red"></span><b>BOQ</b> — $74K, renews 30 Apr (3 days). Utilisation 25.3%, only 5 MAUs. Paperwork status unknown. <span class="tag critical">CRITICAL</span></li>
-      <li><span class="dot amber"></span><b>SKY Network TV</b> — $146.9K, renews 30 Apr (3 days). Renewal going for signature — confirm status. <span class="tag high">HIGH</span></li>
-      <li><span class="dot amber"></span><b>Jumbo Interactive</b> — $190K, renews 22 May. $85K partial churn negotiation. Workshop 7 May needs agenda sent. <span class="tag high">HIGH</span></li>
-      <li><span class="dot amber"></span><b>Mater Foundation</b> — $71.2K, renews 31 May. MAU -20%. Vashti replied — scheduling call next week. <span class="tag high">HIGH</span></li>
-      <li><span class="dot blue"></span><b>Today's meetings:</b> Weekly catch-up (9:00), Standup update (11:00), ANZ EE POD (13:00), VGW CS Weekly (15:30)</li>
-      <li><span class="dot green"></span><b>Upsell prep:</b> VGW visiting Experiment page (6sense). Agata attending today — push Braze integration approval</li>
-      <li><span class="dot purple"></span><b>Envato:</b> Technical questionnaire overdue from Fri. Chase completion today</li>
-    </ul>
+    <div class="section-header"><h2>Morning Briefing</h2><div class="badge">Wed 29 Apr</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot red"></div><div><strong>Beem It</strong> — $70.2K renewal <strong>TOMORROW</strong>. 44 days no human contact. MAU down 42%. SE Jamie Lim assigned. <span class="tag critical">CRITICAL</span></div></li>
+      <li><div class="dot red"></div><div><strong>BOQ</strong> — $74K renewal <strong>TOMORROW</strong>. Utilisation 25.3%, only 5 MAUs. Paperwork should be sent — confirm with David. <span class="tag critical">CRITICAL</span></div></li>
+      <li><div class="dot red"></div><div><strong>SKY Network Television</strong> — $146.9K renewal <strong>TOMORROW</strong>. Flat renewal + $11.8K uplift going for signature. Confirm signature received. <span class="tag high">HIGH</span></div></li>
+      <li><div class="dot amber"></div><div><strong>Jumbo Interactive</strong> — $190K, $85K partial churn in negotiation. Workshop confirmed 7 May. Send agenda + AI context today. <span class="tag high">HIGH</span></div></li>
+      <li><div class="dot amber"></div><div><strong>Entain Feature Flag</strong> — Meeting at 3pm today with Jeni Wong + team. Casino project launching 30 Apr — block unnecessary events.</div></li>
+      <li><div class="dot blue"></div><div><strong>Ferocia/Bendigo</strong> — 9:30am intro call: Nirmal Utwani meets Meera Aneez. Prep Links ID architectural diagram.</div></li>
+      <li><div class="dot blue"></div><div><strong>Brisbane trip sync</strong> — 10:30am with Jamie Lim and Qi Wang. Coordinate Domino in-person logistics.</div></li>
+      <li><div class="dot green"></div><div><strong>VGW</strong> — Dulce responded re Charts and Dashboards overview. Reply today to schedule session. David presenting framework next Thu.</div></li>
+    </ul></div>
   </div>
 
-  <!-- INBOX TRIAGE -->
   <div class="section">
-    <h2><span class="icon" style="background:var(--blue);">✉</span> Inbox Triage</h2>
-    <div class="last-run">Mon 27 Apr 2026, 09:30 AEST</div>
-    <ul>
-      <li><span class="dot red"></span><b>Email:</b> Mater — Vashti replied, scheduling catch-up next week. Respond to confirm availability <span class="tag high">RESPOND</span></li>
-      <li><span class="dot amber"></span><b>Email:</b> BOQ — Andy Clifford accepted in-person chat invite. Confirm details with David</li>
-      <li><span class="dot blue"></span><b>Email:</b> VGW Zoom recording ready for last week's CS Weekly. Review before today's call</li>
-      <li><span class="dot amber"></span><b>Asana (due today):</b> 8 tasks due — Beem It contact, BOQ paperwork, SKY signature, ANZ POD prep, VGW prep, Envato questionnaire, CultureAmp reply, Envato Govern addon</li>
-      <li><span class="dot red"></span><b>Asana (overdue):</b> 20+ tasks overdue — oldest from Mar 2025. Triage needed: close completed, reschedule active, flag blockers</li>
-      <li><span class="dot purple"></span><b>Granola:</b> 12 open action items from past week — VGW (Edwina/Chi feedback), Jumbo (agenda), Ferocia (architecture diagram), RSLQ (dashboard duplication)</li>
-      <li><span class="dot blue"></span><b>Slack:</b> CultureAmp thread — Naomi waiting on May session dates. Swift 6 thread in #pillar-experiment needs acknowledgement</li>
-      <li><span class="dot green"></span><b>FYI:</b> Spenser launched public notebook channels initiative — #spenser-notebook</li>
-    </ul>
+    <div class="section-header"><h2>Inbox Triage</h2><div class="badge">Wed 29 Apr</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot red"></div><div><strong>Email:</strong> Dulce Baracuhy (VGW) — replied requesting Charts and Dashboards overview session. <span class="tag high">REPLY TODAY</span></div></li>
+      <li><div class="dot red"></div><div><strong>Email:</strong> Raquel Fantidis (Wesfarmers OneData) — proposing monthly WIP cadence for Amplitude. <span class="tag high">REPLY TODAY</span></div></li>
+      <li><div class="dot amber"></div><div><strong>Email:</strong> Qi Wang — Eucalyptus PS weekly catchup notes (technical implementation issues, page view tracking). Review and follow up.</div></li>
+      <li><div class="dot amber"></div><div><strong>Email:</strong> Zendesk #393751 — Heatmap rendering offset update (CCd). Check status with engineering.</div></li>
+      <li><div class="dot amber"></div><div><strong>Email:</strong> Zoom recording ready — Lendi workshop (52 min). Review and share key takeaways.</div></li>
+      <li><div class="dot blue"></div><div><strong>Asana:</strong> 30+ overdue tasks across accounts. Priority triage: close completed items, reschedule live ones, flag blockers.</div></li>
+      <li><div class="dot blue"></div><div><strong>Slack:</strong> Swift 6 / Concurrency thread in #pillar-experiment — Thao tagged you, Peter Zhu responded. Relay update to customer.</div></li>
+      <li><div class="dot grey"></div><div><strong>Email:</strong> Mark Drasutis — Meera/Nirmal meeting decline follow-up. You replied let me check — close the loop.</div></li>
+    </ul></div>
   </div>
 
-  <!-- MONDAY WEEKLY REVIEW -->
-  <div class="section full-width">
-    <h2><span class="icon" style="background:var(--purple);">📅</span> Monday Weekly Review</h2>
-    <div class="last-run">Mon 27 Apr 2026, 09:30 AEST</div>
-    <ul>
-      <li><span class="dot red"></span><b>Renewal crunch week:</b> 3 accounts renew 30 Apr — Beem It ($70.2K), BOQ ($74K), SKY Network ($146.9K). Combined $291.1K ARR at risk this Wednesday</li>
-      <li><span class="dot amber"></span><b>Jumbo negotiation:</b> $85K partial churn from $190K. 6-month deal at Growth tier. Workshop confirmed 7 May — send agenda + AI context setup</li>
-      <li><span class="dot green"></span><b>Envato progressing:</b> Experimentation tech sync held last week with 10+ attendees. 107-question evaluation due (overdue). Preferred vendor status. ~$500K expansion potential</li>
-      <li><span class="dot green"></span><b>Mater re-engaged:</b> Vashti replied to intro email — scheduling call for next week. AI interest (annotations + campaign briefs). Renewal 31 May</li>
-      <li><span class="dot blue"></span><b>VGW stable:</b> $546K ARR, 94 MAU (+36%). Last week was enablement session. Braze integration needs Agata's budget approval. Visiting Experiment page (6sense)</li>
-      <li><span class="dot green"></span><b>Upsell pipeline strong:</b> SafetyCulture SR ($472K tpARR), CultureAmp cross-sell ($135K), Lendi expansion ($146K), Sonic Healthcare RFP ($353K tpARR), Envato Experiment (~$500K)</li>
-      <li><span class="dot red"></span><b>OneDigital critical:</b> $54.9K ARR, 1 MAU, 0.1% utilisation, 27 days no contact. Model predicts 100% churn. Needs save plan or write-off decision</li>
-      <li><span class="dot amber"></span><b>Easy Agile declining:</b> $86.4K ARR, MAU -64% (22 to 8), team shrinking. Renewal 30 Jun. Requesting 20% volume reduction</li>
-    </ul>
+  <div class="section">
+    <div class="section-header"><h2>End-of-Day Wrap-Up</h2><div class="badge">Tue 28 Apr</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot green"></div><div><strong>Completed:</strong> VGW contract review call — discussed volume expansion (133% utilisation, 36% MAU growth).</div></li>
+      <li><div class="dot green"></div><div><strong>Completed:</strong> Lendi workshop held (52 min recording available). Taxonomy proposal to be sent.</div></li>
+      <li><div class="dot green"></div><div><strong>Completed:</strong> Eucalyptus PS weekly sync — Qi sent meeting notes covering technical implementation issues.</div></li>
+      <li><div class="dot amber"></div><div><strong>Carry forward:</strong> Beem It — still no contact made. Renewal tomorrow. Escalate immediately.</div></li>
+      <li><div class="dot amber"></div><div><strong>Carry forward:</strong> BOQ renewal paperwork confirmation — David to confirm with Andy Clifford.</div></li>
+      <li><div class="dot amber"></div><div><strong>Carry forward:</strong> SKY TV signature status — not yet confirmed received.</div></li>
+      <li><div class="dot blue"></div><div><strong>Carry forward:</strong> Reply to Endeavour (Therese Rogers) — confirm 7 May in-person session.</div></li>
+      <li><div class="dot blue"></div><div><strong>Carry forward:</strong> Reply to Mater (Vashti Wright-Smith) — propose times for renewal scoping call.</div></li>
+    </ul></div>
   </div>
 
-  <!-- EOD WRAP-UP -->
   <div class="section">
-    <h2><span class="icon" style="background:var(--green);">✅</span> EOD Wrap-Up</h2>
-    <div class="last-run">Fri 25 Apr 2026, 17:30 AEST</div>
-    <ul>
-      <li><span class="dot blue"></span><i>Will be updated at end of day today</i></li>
-      <li><span class="dot amber"></span><b>Priority close-outs for today:</b> Beem It contact made, BOQ paperwork confirmed, SKY signature confirmed, Envato questionnaire chased</li>
-      <li><span class="dot purple"></span><b>Carry forward:</b> Ferocia dashboards, SafetyCulture expansion pitch, NZ Demo Day planning, OneDigital save plan decision</li>
-    </ul>
+    <div class="section-header"><h2>Upsell and Expansion Signals</h2><div class="badge">6 active</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot green"></div><div><strong>Envato</strong> — Experimentation RFP, ~$500K potential. Tech sync held, 107-question evaluation due. Preferred vendor status. <span class="tag upsell">$500K</span></div></li>
+      <li><div class="dot green"></div><div><strong>Sonic Healthcare</strong> — Full platform RFP despite 2028 renewal. tpARR $353K (11x current $30.2K). Demo for 6-7 person panel being scheduled. <span class="tag upsell">$353K</span></div></li>
+      <li><div class="dot green"></div><div><strong>SafetyCulture</strong> — SR displacement of Hotjar/LogRocket. $187K ARR, tpARR $472K. 70 AI MAUs (highest in book). Dave Chalmers doing taxonomy review. <span class="tag upsell">$285K gap</span></div></li>
+      <li><div class="dot green"></div><div><strong>VGW</strong> — $546K ARR, 133% utilisation. Volume expansion at contract review. Braze integration pending Edwina/Agata approval. <span class="tag upsell">EXPAND</span></div></li>
+      <li><div class="dot green"></div><div><strong>Culture Amp</strong> — $135K ARR, MAU +103%. Pendo (Guides), Optimizely (Experiment), LaunchDarkly displacement. 6sense Activation signal. <span class="tag upsell">MULTI</span></div></li>
+      <li><div class="dot green"></div><div><strong>Lendi</strong> — $146K ARR, renewal Jun 30. Segment migration completing. LLM analytics, real-time propensity scoring opportunities. <span class="tag upsell">EXPAND</span></div></li>
+    </ul></div>
   </div>
 
-  <!-- FRIDAY WEEKLY WRAP-UP -->
   <div class="section">
-    <h2><span class="icon" style="background:var(--red);">🏆</span> Friday Weekly Wrap-Up</h2>
-    <div class="last-run">(Last updated: Friday 25 Apr 2026)</div>
-    <ul>
-      <li><span class="dot green"></span><b>Wins:</b> Envato tech sync completed (10+ attendees), Jumbo workshop confirmed for 7 May, Mater Foundation re-engaged</li>
-      <li><span class="dot amber"></span><b>Gaps:</b> Beem It still no contact, Envato questionnaire not completed, 12+ Asana tasks overdue</li>
-      <li><span class="dot blue"></span><b>Next week preview:</b> 3 renewals closing 30 Apr, Jumbo agenda to send, Mater call to schedule, OneDigital decision needed</li>
+    <div class="section-header"><h2>Weekly Review</h2><div class="badge">Mon 28 Apr</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot blue"></div><div><strong>3 renewals due 30 Apr:</strong> Beem It ($70.2K), BOQ ($74K), SKY TV ($146.9K). Combined $291K ARR at risk.</div></li>
+      <li><div class="dot amber"></div><div><strong>Jumbo workshop confirmed</strong> for 7 May. $85K partial churn negotiation. PostHog competitive threat.</div></li>
+      <li><div class="dot green"></div><div><strong>Envato tech sync completed</strong> with 10+ attendees. 107-question evaluation due. Preferred vendor for Experimentation.</div></li>
+      <li><div class="dot green"></div><div><strong>Lendi workshop delivered.</strong> Taxonomy proposal and PS sessions in progress. Segment migration on track.</div></li>
+      <li><div class="dot amber"></div><div><strong>Mater Foundation</strong> — renewal scoping call overdue by 2 weeks. MAU declining -20%.</div></li>
+      <li><div class="dot red"></div><div><strong>OneDigital</strong> — 1 MAU, 0.1% utilisation, 100% churn predicted ($54.9K). <span class="tag critical">CRITICAL</span></div></li>
+      <li><div class="dot blue"></div><div><strong>Granola action items:</strong> 12 items for Santi, 11 items to track from others (David, Qi, Simon, Heeren).</div></li>
+    </ul></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Weekly Wrap-Up</h2><div class="badge">Fri 25 Apr</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot green"></div><div><strong>Win:</strong> Envato Experimentation tech sync completed. Preferred vendor confirmed. ~$500K pipeline.</div></li>
+      <li><div class="dot green"></div><div><strong>Win:</strong> Jumbo save plan in motion — Kurt engaged, workshop 7 May confirmed.</div></li>
+      <li><div class="dot green"></div><div><strong>Win:</strong> VGW contract review held — volume expansion discussion opened.</div></li>
+      <li><div class="dot amber"></div><div><strong>Gap:</strong> Beem It contact not yet made — 44 days silence before 30 Apr renewal.</div></li>
+      <li><div class="dot amber"></div><div><strong>Gap:</strong> 12+ Asana tasks overdue, some by 4+ weeks. Bulk triage needed.</div></li>
+      <li><div class="dot blue"></div><div><strong>Next week:</strong> 3 renewals 30 Apr. Entain Casino launch. Jumbo workshop prep. Brisbane trip.</div></li>
     </ul>
+    <p class="muted" style="margin-top:10px; font-size:12px;">(Last updated: Friday 25 Apr 2026)</p></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Todays Meetings</h2><div class="badge">7 meetings</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot grey"></div><div><strong>05:30</strong> — Office Hours: Post AI Week — AI projects intake</div></li>
+      <li><div class="dot blue"></div><div><strong>09:30</strong> — Nirmal Utwani and Meera Aneez (Ferocia) — Intro Call <span class="muted">(optional)</span></div></li>
+      <li><div class="dot blue"></div><div><strong>10:00</strong> — Heeren / Santiago cadence <span class="muted">(Zoom)</span></div></li>
+      <li><div class="dot grey"></div><div><strong>10:00</strong> — AAA: Midweek Social Engagement Timeslot</div></li>
+      <li><div class="dot blue"></div><div><strong>10:30</strong> — Brisbane trip sync <span class="muted">(Jamie Lim, Qi Wang)</span></div></li>
+      <li><div class="dot blue"></div><div><strong>13:00</strong> — Richy / Santi sync <span class="muted">(Richard Prabhu)</span></div></li>
+      <li><div class="dot purple"></div><div><strong>15:00</strong> — Entain Feature Flag <span class="muted">(Jeni Wong + 10 Entain, Teams)</span></div></li>
+    </ul></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><h2>Meeting Action Items (7 days)</h2><div class="badge">Granola</div></div>
+    <div class="section-body"><ul>
+      <li><div class="dot red"></div><div><strong>Entain Casino</strong> — Block unnecessary events before 30 Apr launch. <span class="tag critical">TOMORROW</span></div></li>
+      <li><div class="dot amber"></div><div><strong>Lendi</strong> — Send draft taxonomy proposal (overdue). Coordinate with Qi on PSP sessions.</div></li>
+      <li><div class="dot amber"></div><div><strong>VGW</strong> — Check with Edwina re CRO team feedback. Discuss Qi performance with Richard.</div></li>
+      <li><div class="dot amber"></div><div><strong>Ferocia</strong> — Create Links ID diagram. Configure Branch attribution. Organise multi-dept workshop.</div></li>
+      <li><div class="dot blue"></div><div><strong>Jumbo</strong> — Send workshop agenda + AI context setup. Confirm 7 May with Kurt.</div></li>
+      <li><div class="dot blue"></div><div><strong>RSLQ</strong> — Follow up on dashboard duplication. Check Global Agent context limit.</div></li>
+      <li><div class="dot grey"></div><div><strong>Tracking others:</strong> David: VGW framework Thu; Qi: Entain decks; Simon: CloudFlare (Envato); Heeren: Envato contract.</div></li>
+    </ul></div>
   </div>
 
 </div>
 
-<div style="text-align:center; color:var(--text-muted); font-size:0.75rem; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
-  CSM Command Centre · Auto-consolidated Mon 27 Apr 2026 09:30 AEST · Data from Salesforce, Slack, Gmail, Asana, Granola, Google Calendar
-</div>
-
+<script>
+(function() {
+  var data = window.__DASHBOARD_DATA;
+  if (data && data.consolidatedAt) {
+    var d = new Date(data.consolidatedAt);
+    var el = document.querySelector('.header .meta');
+    if (el) el.innerHTML = 'Santi Perez · APJ Customer Success · Last updated: ' +
+      d.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) +
+      ', ' + d.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+  }
+})();
+</script>
 </body>
 </html>
