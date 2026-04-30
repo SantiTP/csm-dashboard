@@ -3,168 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSM Command Centre — Santi Perez</title>
+<title>CSM Command Centre â Santi Perez</title>
 <style>
   :root {
     --bg: #0f1117;
-    --card: #1a1d27;
-    --card-border: #2a2d3a;
+    --surface: #1a1d27;
+    --surface-hover: #22252f;
+    --border: #2a2d3a;
     --text: #e4e4e7;
-    --text-muted: #9ca3af;
+    --text-muted: #8b8d97;
     --accent: #6366f1;
+    --accent-soft: rgba(99,102,241,0.12);
     --red: #ef4444;
+    --red-soft: rgba(239,68,68,0.12);
     --amber: #f59e0b;
+    --amber-soft: rgba(245,158,11,0.12);
     --green: #22c55e;
+    --green-soft: rgba(34,197,94,0.12);
     --blue: #3b82f6;
-    --purple: #a855f7;
+    --blue-soft: rgba(59,130,246,0.12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    min-height: 100vh;
-  }
-  .header {
-    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--card-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .header h1 { font-size: 1.5rem; font-weight: 700; }
-  .header .subtitle { color: var(--text-muted); font-size: 0.85rem; }
-  .header .timestamp {
-    background: rgba(255,255,255,0.1);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    padding: 24px 32px;
-  }
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-  }
-  .stat-card .value {
-    font-size: 2.2rem;
-    font-weight: 800;
-    line-height: 1.1;
-  }
-  .stat-card .label {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+  .header { padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 20px; font-weight: 600; }
+  .header h1 span { color: var(--accent); }
+  .header .meta { font-size: 13px; color: var(--text-muted); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 24px 32px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+  .stat-card .value { font-size: 32px; font-weight: 700; }
   .stat-card.red .value { color: var(--red); }
   .stat-card.amber .value { color: var(--amber); }
   .stat-card.green .value { color: var(--green); }
   .stat-card.blue .value { color: var(--blue); }
-  .sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 20px;
-    padding: 0 32px 32px;
-  }
-  .section {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .section-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--card-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .section-header h2 { font-size: 1rem; font-weight: 600; }
-  .section-header .badge {
-    font-size: 0.7rem;
-    padding: 3px 10px;
-    border-radius: 12px;
-    background: rgba(99,102,241,0.15);
-    color: var(--accent);
-  }
+  .sections { padding: 0 32px 32px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .section-header h2 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .badge-red { background: var(--red-soft); color: var(--red); }
+  .badge-amber { background: var(--amber-soft); color: var(--amber); }
+  .badge-green { background: var(--green-soft); color: var(--green); }
+  .badge-blue { background: var(--blue-soft); color: var(--blue); }
+  .badge-muted { background: rgba(139,141,151,0.12); color: var(--text-muted); }
+  .section-header .timestamp { font-size: 12px; color: var(--text-muted); }
   .section-body { padding: 16px 20px; }
   .section-body ul { list-style: none; }
-  .section-body li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.88rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
+  .section-body li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
   .section-body li:last-child { border-bottom: none; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
-  .dot.red { background: var(--red); }
-  .dot.amber { background: var(--amber); }
-  .dot.green { background: var(--green); }
-  .dot.blue { background: var(--blue); }
-  .dot.purple { background: var(--purple); }
-  .tag {
-    display: inline-block;
-    font-size: 0.68rem;
-    padding: 1px 8px;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-left: 4px;
-  }
-  .tag.critical { background: rgba(239,68,68,0.15); color: var(--red); }
-  .tag.high { background: rgba(245,158,11,0.15); color: var(--amber); }
-  .tag.upsell { background: rgba(34,197,94,0.15); color: var(--green); }
-  .tag.info { background: rgba(59,130,246,0.15); color: var(--blue); }
-  .muted { color: var(--text-muted); }
-  .section.full-width { grid-column: 1 / -1; }
-  @media (max-width: 860px) {
-    .sections { grid-template-columns: 1fr; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-    .header, .stats-row, .sections { padding-left: 16px; padding-right: 16px; }
+  .dot-red { background: var(--red); }
+  .dot-amber { background: var(--amber); }
+  .dot-green { background: var(--green); }
+  .dot-blue { background: var(--blue); }
+  .dot-muted { background: var(--text-muted); }
+  .item-meta { font-size: 12px; color: var(--text-muted); }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+  .tag-renewal { background: var(--red-soft); color: var(--red); }
+  .tag-upsell { background: var(--green-soft); color: var(--green); }
+  .tag-action { background: var(--amber-soft); color: var(--amber); }
+  .tag-meeting { background: var(--blue-soft); color: var(--blue); }
+  .tag-overdue { background: var(--red-soft); color: var(--red); }
+  .dimmed { opacity: 0.5; }
+  .dimmed-note { font-size: 12px; color: var(--text-muted); font-style: italic; padding: 12px 0; }
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .header, .stats-grid, .sections { padding-left: 16px; padding-right: 16px; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div>
-    <h1>CSM Command Centre</h1>
-    <div class="subtitle">Santi Perez &middot; APJ Customer Success &middot; Melbourne</div>
-  </div>
-  <div class="timestamp">Last updated: Wed 29 Apr 2026 &middot; 17:37 AEST</div>
-</div>
-
 <!-- __DASHBOARD_DATA_START__ -->
 <script>
 window.__DASHBOARD_DATA = {
-  "consolidatedAt": "2026-04-29T17:37:29+10:00",
-  "stats": { "atRisk": 12, "openItems": 38, "upsell": 6, "meetings": 7 },
+  "consolidatedAt": "2026-05-01T09:00:00+10:00",
+  "stats": { "atRisk": 5, "openItems": 18, "upsell": 4, "meetings": 6 },
   "tasks": {
     "morning-briefing": {
-      "lastRun": "2026-04-29T17:37:00+10:00",
+      "lastRun": "2026-05-01T08:55:00+10:00",
       "html": ""
     },
     "eod-wrap-up": {
-      "lastRun": "2026-04-29T17:37:00+10:00",
+      "lastRun": "2026-04-30T18:00:00+10:00",
       "html": ""
     },
     "inbox-triage": {
-      "lastRun": "2026-04-29T17:37:00+10:00",
+      "lastRun": "2026-05-01T08:55:00+10:00",
       "html": ""
     },
     "monday-weekly-review": {
@@ -180,22 +106,27 @@ window.__DASHBOARD_DATA = {
 </script>
 <!-- __DASHBOARD_DATA_END__ -->
 
-<div class="stats-row">
+<div class="header">
+  <h1><span>&#9679;</span> CSM Command Centre</h1>
+  <div class="meta">Santi Perez &middot; APJ &middot; Updated <span id="ts"></span></div>
+</div>
+
+<div class="stats-grid">
   <div class="stat-card red">
-    <div class="value">12</div>
     <div class="label">At-Risk Accounts</div>
+    <div class="value" id="stat-risk">5</div>
   </div>
   <div class="stat-card amber">
-    <div class="value">38</div>
     <div class="label">Open Items</div>
+    <div class="value" id="stat-open">18</div>
   </div>
   <div class="stat-card green">
-    <div class="value">6</div>
     <div class="label">Upsell Signals</div>
+    <div class="value" id="stat-upsell">4</div>
   </div>
   <div class="stat-card blue">
-    <div class="value">7</div>
     <div class="label">Meetings Today</div>
+    <div class="value" id="stat-meetings">6</div>
   </div>
 </div>
 
@@ -204,58 +135,43 @@ window.__DASHBOARD_DATA = {
   <!-- MORNING BRIEFING -->
   <div class="section">
     <div class="section-header">
-      <h2>Morning Briefing</h2>
-      <span class="badge">Live</span>
+      <h2>&#9728;&#65039; Morning Briefing <span class="badge badge-red">5 at-risk</span></h2>
+      <span class="timestamp">1 May 2026, 8:55 AM AEST</span>
     </div>
     <div class="section-body">
       <ul>
-        <li><span class="dot red"></span><span><strong>BOQ</strong> — $74K ARR, renewal <strong>tomorrow</strong> (30 Apr). Confirm paperwork sent. David meeting Andy in Brisbane next week. <span class="tag critical">Critical</span></span></li>
-        <li><span class="dot red"></span><span><strong>Beem It</strong> — $70K ARR, renewal <strong>tomorrow</strong>. MAU down 38%. 44+ days no contact. Priority #1: make contact today. <span class="tag critical">High</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Jumbo Interactive</strong> — $190K ARR, $85K partial churn in negotiation. Send workshop agenda, confirm May 7 date with Kurt. <span class="tag high">High</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Mater Foundation</strong> — $71K ARR, MAU declining 20%, renewal 31 May. Re-engagement plan needed. <span class="tag high">High</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Entain Feature Flag</strong> — Escalate internally to experiment team. Critical assessment needed re: changes affecting customers. Meeting today 3pm.</span></li>
-        <li><span class="dot blue"></span><span><strong>Lendi</strong> — Draft taxonomy proposal due today. Upsell outlook, $146K ARR, MAU up 35%. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot blue"></span><span><strong>Ferocia / Nirmal intro</strong> — 9:30am call with Meera Aneez. Prep starter dashboards (overdue).</span></li>
-        <li><span class="dot green"></span><span><strong>RSLQ</strong> — Teresa Breslin accepted in-person chat invitation. Confirmed via email this morning.</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- TODAY'S MEETINGS -->
-  <div class="section">
-    <div class="section-header">
-      <h2>Today’s Meetings</h2>
-      <span class="badge">7 meetings</span>
-    </div>
-    <div class="section-body">
-      <ul>
-        <li><span class="dot purple"></span><span><strong>05:30</strong> — Office Hours: Post AI Week — AI Projects In-take <span class="muted">(Zoom)</span></span></li>
-        <li><span class="dot blue"></span><span><strong>09:30</strong> — Nirmal Utwani (Amplitude) &amp; Meera Aneez (Ferocia) Intro <span class="muted">(Google Meet)</span></span></li>
-        <li><span class="dot green"></span><span><strong>10:00</strong> — AAA: Midweek Social Engagement Timeslot <span class="muted">(APJ)</span></span></li>
-        <li><span class="dot blue"></span><span><strong>10:30</strong> — Brisbane Trip Sync <span class="muted">(Jamie, Qi — Zoom)</span></span></li>
-        <li><span class="dot amber"></span><span><strong>12:05</strong> — VET <span class="muted">(Personal)</span></span></li>
-        <li><span class="dot blue"></span><span><strong>13:00</strong> — Richy / Santi Sync <span class="muted">(Zoom)</span></span></li>
-        <li><span class="dot red"></span><span><strong>15:00</strong> — Entain Feature Flag <span class="muted">(MS Teams — Bryce, Sam, Jeni +7)</span></span></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- INBOX TRIAGE -->
-  <div class="section">
-    <div class="section-header">
-      <h2>Inbox Triage</h2>
-      <span class="badge">Prioritised</span>
-    </div>
-    <div class="section-body">
-      <ul>
-        <li><span class="dot red"></span><span><strong>Zendesk #393261</strong> — Session Replay TRC update (Entain). Multiple updates overnight. Check latest status. <span class="tag critical">Urgent</span></span></li>
-        <li><span class="dot red"></span><span><strong>Zendesk #393753</strong> — Bot blocking ticket. 3 updates since yesterday. Needs acknowledgement. <span class="tag critical">Urgent</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Zendesk #393751</strong> — Heatmap rendering offset. Customer awaiting update. <span class="tag high">Action</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Zendesk #393093</strong> — Flag property discrepancy (Qi CC’d). Multiple updates. Relay to customer. <span class="tag high">Action</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Slack DMs</strong> — Manabu (missed call?), Qi Wang (pending), Ken Kutyn (agent analytics push for Ilankir), Richard Prabhu (link request). <span class="tag info">Review</span></span></li>
-        <li><span class="dot blue"></span><span><strong>Zoom recording</strong> — Entain meeting recap ready. Review before today’s 3pm Feature Flag session. <span class="tag info">Prep</span></span></li>
-        <li><span class="dot green"></span><span><strong>RSLQ</strong> — Teresa Breslin accepted meeting invite. No action needed.</span></li>
-        <li><span class="dot green"></span><span><strong>Slack</strong> — Hamish Binnie thanked you for pass-through; will read this afternoon. Heeren confirmed tomorrow morning sync.</span></li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>Beem It</strong> &mdash; $70.2K ARR renewal was due 30 Apr. 44+ days no human contact, MAU &darr;28%, utilisation 31.6%. Order submitted (Stage 6.5, $75.8K). <strong>Confirm renewal closed.</strong><span class="tag tag-renewal">RENEWAL</span></div>
+        </li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>SKY Network Television</strong> &mdash; $146.9K ARR renewal was due 30 Apr. Flat renewal + uplift going for signature. Edwin Chan (Sky NZ) replied &mdash; meeting booked for Tue. <strong>Confirm signature received.</strong><span class="tag tag-renewal">RENEWAL</span></div>
+        </li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>BOQ</strong> &mdash; $74K ARR renewal was due 30 Apr. Utilisation 25.3%, 5 MAUs. David meeting Andy in Brisbane first week of May. <strong>Check paperwork status.</strong><span class="tag tag-renewal">RENEWAL</span></div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>Jumbo Interactive</strong> &mdash; $190K ARR, $85K partial churn negotiated. Renewal 22 May. Moving Enterprise &rarr; Growth. PostHog competitive threat. Workshop agenda to send + confirm May 7 date with Kurt.<span class="tag tag-action">ACTION</span></div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>Mater Foundation</strong> &mdash; $71.2K ARR, MAU &darr;7%, renewal 31 May. Multi-product but shallow adoption. Investigate decline driver.<span class="tag tag-action">ACTION</span></div>
+        </li>
+        <li>
+          <span class="dot dot-green"></span>
+          <div><strong>SafetyCulture</strong> &mdash; $51.8K SR expansion in Stage 6 (Negotiation), closing 30 Apr. Hotjar/LogRocket displacement. tpARR $472K whitespace. Dave Chalmers taxonomy review underway.<span class="tag tag-upsell">UPSELL</span></div>
+        </li>
+        <li>
+          <span class="dot dot-green"></span>
+          <div><strong>Envato</strong> &mdash; $50K Experimentation expansion in Discovery. 107-question eval due. Tech sync held 23 Apr with 10+ attendees. Preferred vendor status.<span class="tag tag-upsell">UPSELL</span></div>
+        </li>
+        <li>
+          <span class="dot dot-blue"></span>
+          <div><strong>Today's meetings:</strong> Santi &amp; David sync (9am) &middot; BeemIt sync (10am) &middot; Dabble sync (11:30am) &middot; APJ CS Team (2pm) &middot; Heeren cadence (3:30pm) &middot; VGW weekly (4:30pm)<span class="tag tag-meeting">6 MEETINGS</span></div>
+        </li>
       </ul>
     </div>
   </div>
@@ -263,134 +179,109 @@ window.__DASHBOARD_DATA = {
   <!-- EOD WRAP-UP -->
   <div class="section">
     <div class="section-header">
-      <h2>EOD Wrap-Up</h2>
-      <span class="badge">In Progress</span>
+      <h2>&#127769; End-of-Day Wrap-Up <span class="badge badge-amber">Wed 30 Apr</span></h2>
+      <span class="timestamp">30 Apr 2026, 6:00 PM AEST</span>
     </div>
     <div class="section-body">
       <ul>
-        <li><span class="dot red"></span><span><strong>Beem It contact</strong> — Still critical. Confirm outreach was made today. If not, escalate to David. <span class="tag critical">Gap</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Lendi taxonomy proposal</strong> — Due today. Check if sent to Bharadwaj &amp; Adam. <span class="tag high">Due Today</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Kurt / Jumbo agenda</strong> — Workshop agenda + AI context setup needs sending. Confirm May 7 date. <span class="tag high">Due Today</span></span></li>
-        <li><span class="dot amber"></span><span><strong>Entain escalation</strong> — After 3pm meeting, document outcome and next steps for experiment team.</span></li>
-        <li><span class="dot blue"></span><span><strong>Brisbane trip planning</strong> — Outcome from 10:30 sync with Jamie &amp; Qi. Confirm Domino’s reschedule, Endeavor meeting requirements.</span></li>
-        <li><span class="dot blue"></span><span><strong>Dabble strategy alignment</strong> — Schedule Thursday session per Granola notes.</span></li>
-        <li><span class="dot blue"></span><span><strong>Swift 6 / Concurrency</strong> — Respond to #pillar-experiment thread (Thao Nguyen). Relay Peter Zhu’s update to customer.</span></li>
-        <li><span class="dot green"></span><span><strong>Carry forward</strong> — 28 overdue Asana tasks need triage. Ferocia dashboards, SafetyCulture pitch, Mater MAU investigation all overdue.</span></li>
+        <li>
+          <span class="dot dot-green"></span>
+          <div><strong>Completed:</strong> Dabble sync, APJ CS Team meeting, Heeren cadence, VGW growth-app weekly. Entain Feature Flag session (29 Apr). Lendi workshop (28 Apr). Ferocia intro call with Nirmal (29 Apr).</div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>Gaps:</strong> Jumbo workshop agenda not yet sent (Qi chasing). Ferocia follow-up with Meera/Seamus still pending (Mark asked). Endeavour &mdash; Therese asked to confirm May 7 in-person; reply needed.</div>
+        </li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>Carry forward:</strong> 3 renewals due 30 Apr (Beem It, SKY, BOQ) &mdash; confirm all closed. Envato technical questionnaire overdue. SafetyCulture expansion close status. Swift 6 Slack thread unacknowledged.</div>
+        </li>
+        <li>
+          <span class="dot dot-blue"></span>
+          <div><strong>Support tickets active:</strong> Bot blocking (#393753), Project alerts (#393236), Session Replay TRC (#393261), Missing events migration (#391620), Experiment flag discrepancy (#393093).</div>
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- AT-RISK ACCOUNTS -->
-  <div class="section full-width">
-    <div class="section-header">
-      <h2>At-Risk Account Summary</h2>
-      <span class="badge">Salesforce Live</span>
-    </div>
-    <div class="section-body">
-      <div style="overflow-x:auto;">
-      <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--card-border); text-align:left;">
-            <th style="padding:8px 12px;">Account</th>
-            <th style="padding:8px 12px;">ARR</th>
-            <th style="padding:8px 12px;">Risk</th>
-            <th style="padding:8px 12px;">Renewal</th>
-            <th style="padding:8px 12px;">MAU Trend</th>
-            <th style="padding:8px 12px;">Churn $</th>
-            <th style="padding:8px 12px;">Outlook</th>
-            <th style="padding:8px 12px;">Products</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Bank of Queensland</strong></td><td style="padding:8px 12px;">$74K</td><td style="padding:8px 12px;"><span class="tag critical">Critical</span></td><td style="padding:8px 12px; color:var(--red);"><strong>30 Apr</strong></td><td style="padding:8px 12px; color:var(--green);">+25%</td><td style="padding:8px 12px;">$11.1K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics, Web Exp</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Beem It</strong></td><td style="padding:8px 12px;">$70K</td><td style="padding:8px 12px;"><span class="tag critical">High</span></td><td style="padding:8px 12px; color:var(--red);"><strong>30 Apr</strong></td><td style="padding:8px 12px; color:var(--red);">-38%</td><td style="padding:8px 12px;">$14.1K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Jumbo Interactive</strong></td><td style="padding:8px 12px;">$190K</td><td style="padding:8px 12px;"><span class="tag critical">High</span></td><td style="padding:8px 12px; color:var(--amber);">31 May</td><td style="padding:8px 12px; color:var(--red);">-3%</td><td style="padding:8px 12px;">$85K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics, CDP, Exp</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Mater Foundation</strong></td><td style="padding:8px 12px;">$71K</td><td style="padding:8px 12px;"><span class="tag critical">High</span></td><td style="padding:8px 12px; color:var(--amber);">31 May</td><td style="padding:8px 12px; color:var(--red);">-20%</td><td style="padding:8px 12px;">$5.7K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics, CDP, Exp</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Linktree</strong></td><td style="padding:8px 12px;">$227K</td><td style="padding:8px 12px;"><span class="tag critical">High</span></td><td style="padding:8px 12px;">31 Aug</td><td style="padding:8px 12px; color:var(--red);">-2%</td><td style="padding:8px 12px;">$18.2K</td><td style="padding:8px 12px; color:var(--red);">Partial Churn</td><td style="padding:8px 12px;">Analytics, SR</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Ferocia</strong></td><td style="padding:8px 12px;">$200K</td><td style="padding:8px 12px;"><span class="tag critical">Critical</span></td><td style="padding:8px 12px;">31 Mar '27</td><td style="padding:8px 12px; color:var(--green);">+35%</td><td style="padding:8px 12px;">$30.1K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics, SR</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>Quantium</strong></td><td style="padding:8px 12px;">$24K</td><td style="padding:8px 12px;"><span class="tag critical">Critical</span></td><td style="padding:8px 12px;">31 Mar '27</td><td style="padding:8px 12px; color:var(--red);">-53%</td><td style="padding:8px 12px;">$4.2K</td><td style="padding:8px 12px;">—</td><td style="padding:8px 12px;">Analytics</td></tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 12px;"><strong>PlaceIt</strong></td><td style="padding:8px 12px;">$348K</td><td style="padding:8px 12px;"><span class="tag critical">Critical</span></td><td style="padding:8px 12px;">31 Oct '27</td><td style="padding:8px 12px; color:var(--green);">+8%</td><td style="padding:8px 12px;">$52.2K</td><td style="padding:8px 12px; color:var(--green);">Upsell</td><td style="padding:8px 12px;">Analytics, CDP, SR</td></tr>
-          <tr><td style="padding:8px 12px;"><strong>RSL Queensland</strong></td><td style="padding:8px 12px;">$143K</td><td style="padding:8px 12px;"><span class="tag critical">Critical</span></td><td style="padding:8px 12px;">31 Oct '28</td><td style="padding:8px 12px; color:var(--green);">+200%</td><td style="padding:8px 12px;">$21.4K</td><td style="padding:8px 12px;">Flat</td><td style="padding:8px 12px;">Analytics, CDP, Web Exp, SR, PSP</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- UPSELL SIGNALS -->
+  <!-- INBOX TRIAGE -->
   <div class="section">
     <div class="section-header">
-      <h2>Upsell Signals</h2>
-      <span class="badge">6 accounts</span>
+      <h2>&#128229; Inbox Triage <span class="badge badge-amber">8 items</span></h2>
+      <span class="timestamp">1 May 2026, 8:55 AM AEST</span>
     </div>
     <div class="section-body">
       <ul>
-        <li><span class="dot green"></span><span><strong>Lendi</strong> — $146K ARR, MAU +35%, Upsell outlook. Multi-product (Analytics, CDP, SR). tpARR $387K. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot green"></span><span><strong>Dabble Sports</strong> — $360K ARR, MAU +26%, 53 AI MAUs (highest in book). tpARR $378K. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot green"></span><span><strong>SafetyCulture</strong> — $187K ARR, 65 AI MAUs. Hotjar displacement opportunity. tpARR $472K. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot green"></span><span><strong>VGW</strong> — $546K ARR, MAU +37%, full platform. Braze integration + Surveys replacement pipeline. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot green"></span><span><strong>Wesfarmers One Pass</strong> — $67K ARR, MAU +21%. tpARR $2.9M — massive whitespace. <span class="tag upsell">Upsell</span></span></li>
-        <li><span class="dot green"></span><span><strong>Sonic Healthcare</strong> — $30K ARR, full RFP issued. tpARR $353K — 11x current. Demo being scheduled. <span class="tag upsell">Upsell</span></span></li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>[Email] Endeavour &mdash; Therese Rogers</strong> &mdash; Asking to confirm Thu 7 May in-person session timing. Reply needed today.<span class="tag tag-action">RESPOND</span></div>
+        </li>
+        <li>
+          <span class="dot dot-red"></span>
+          <div><strong>[Slack] Mark Drasutis</strong> &mdash; Follow up with Meera/Seamus at Ferocia on next steps + ensure Amplitude is part of their AI week/hack.<span class="tag tag-action">RESPOND</span></div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>[Slack] Qi Wang</strong> &mdash; Asking for update on Jumbo training agenda. Send workshop agenda document.<span class="tag tag-action">RESPOND</span></div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>[Email] Entain &mdash; Jeni Wong</strong> &mdash; Forwarded invites for 6 May in-person sessions (Data Governance 11am, Taxonomy Best Practice 9:30am). Confirm attendance.<span class="tag tag-action">CONFIRM</span></div>
+        </li>
+        <li>
+          <span class="dot dot-amber"></span>
+          <div><strong>[Email] Heeren Gandhi</strong> &mdash; Calendar invite: &quot;Update on Beem&quot; with AusPayPlus team, Mon 4 May 2pm. Accept invite.<span class="tag tag-action">CONFIRM</span></div>
+        </li>
+        <li>
+          <span class="dot dot-blue"></span>
+          <div><strong>[Email] Support ticket #393753</strong> &mdash; Bot blocking updates (multiple). CC&#39;d. Latest update 30 Apr.</div>
+        </li>
+        <li>
+          <span class="dot dot-blue"></span>
+          <div><strong>[Email] Support ticket #393261</strong> &mdash; Session Replay TRC updates. CC&#39;d. Latest update 29 Apr.</div>
+        </li>
+        <li>
+          <span class="dot dot-muted"></span>
+          <div><strong>[Asana] 28 overdue tasks</strong> &mdash; Triage needed: close completed items, reschedule active ones, flag blockers. Oldest overdue: Mar 2025.<span class="tag tag-overdue">OVERDUE</span></div>
+        </li>
       </ul>
     </div>
   </div>
 
   <!-- MONDAY WEEKLY REVIEW -->
-  <div class="section">
+  <div class="section dimmed">
     <div class="section-header">
-      <h2>Weekly Review</h2>
-      <span class="badge">Mon 28 Apr</span>
+      <h2>&#128197; Monday Weekly Review <span class="badge badge-muted">Mon only</span></h2>
+      <span class="timestamp">(Last updated: Monday 28 Apr 2026)</span>
     </div>
     <div class="section-body">
-      <ul>
-        <li><span class="dot blue"></span><span><em>(Last updated: Monday 28 Apr)</em> — Key themes this week: 2 renewals due 30 Apr (BOQ, Beem It), Jumbo partial churn negotiation, Entain experimentation rollout, Brisbane trip planning.</span></li>
-        <li><span class="dot amber"></span><span><strong>Renewal watch</strong> — BOQ and Beem It both due 30 Apr. SKY TV renewal signature expected. Jumbo negotiating $85K partial churn for 31 May.</span></li>
-        <li><span class="dot green"></span><span><strong>Wins last week</strong> — RSLQ in-person meeting confirmed. Envato tech sync went well (10+ attendees). Lendi workshop completed. Culture Amp MAU +111%.</span></li>
-        <li><span class="dot red"></span><span><strong>Gaps</strong> — 28+ overdue Asana tasks. Beem It 44+ days no contact. Ferocia dashboards overdue. SafetyCulture expansion pitch overdue.</span></li>
-      </ul>
+      <p class="dimmed-note">Weekly review runs on Mondays. Last week highlights: Entain Feature Flag session held, Lendi workshop completed, VGW contract review with Nick Rutherford, Ferocia intro call with Nirmal &amp; Meera, APJ CSM weekly connect with Ritwik. Next Monday&#39;s review will refresh this section automatically.</p>
     </div>
   </div>
 
   <!-- FRIDAY WEEKLY WRAP-UP -->
-  <div class="section">
+  <div class="section dimmed">
     <div class="section-header">
-      <h2>Weekly Wrap-Up</h2>
-      <span class="badge">Fri 25 Apr</span>
+      <h2>&#127881; Friday Weekly Wrap-Up <span class="badge badge-muted">Fri only</span></h2>
+      <span class="timestamp">(Last updated: Friday 25 Apr 2026)</span>
     </div>
     <div class="section-body">
-      <ul>
-        <li><span class="dot blue"></span><span><em>(Last updated: Friday 25 Apr)</em> — Next update on Friday 2 May.</span></li>
-        <li><span class="dot green"></span><span><strong>Week's wins</strong> — Envato 107-question technical evaluation submitted. Jumbo call with Kurt went well. VGW contract review framework drafted. Entain casino project launching 30 Apr.</span></li>
-        <li><span class="dot amber"></span><span><strong>Carry-forward</strong> — Beem It outreach still outstanding. BOQ paperwork confirmation. NZ Demo Day unscheduled. Easy Agile retention strategy needed.</span></li>
-        <li><span class="dot blue"></span><span><strong>Next week preview</strong> — Brisbane trip prep, Entain Feature Flag escalation, Glaze visit preparations, 2 renewals due 30 Apr.</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- GRANOLA ACTION ITEMS -->
-  <div class="section full-width">
-    <div class="section-header">
-      <h2>Recent Meeting Action Items</h2>
-      <span class="badge">Granola — Last 3 days</span>
-    </div>
-    <div class="section-body">
-      <ul>
-        <li><span class="dot red"></span><span><strong>Today</strong> — Escalate Entain feature flag issue internally to experiment team. Follow up with Kurt re: Jumbo agenda. Clarify Endeavour meeting requirements.</span></li>
-        <li><span class="dot amber"></span><span><strong>Today</strong> — Send draft taxonomy proposal to Lendi (due from yesterday's workshop). Jamie to reschedule Domino's to 2:00-2:30pm.</span></li>
-        <li><span class="dot amber"></span><span><strong>28 Apr</strong> — Dabble: schedule Thursday strategy alignment. Fergus to review UTM properties. Qi to check dashboard filtering.</span></li>
-        <li><span class="dot blue"></span><span><strong>28 Apr</strong> — VGW: David to present framework to Nick (Thursday next week). Chi to provide event volume breakdown. Taxonomy audit for mid-year budget.</span></li>
-        <li><span class="dot blue"></span><span><strong>28 Apr</strong> — Entain Weekly PS: Qi to share presentation decks for review. Casino project launching 30 Apr — 84 legacy events being managed.</span></li>
-        <li><span class="dot blue"></span><span><strong>28 Apr</strong> — APJ CSM Weekly: Continue Glaze visit preparations for Brisbane. Ritwik to call re: visa process. Begin TSM profile training materials review.</span></li>
-        <li><span class="dot purple"></span><span><strong>27 Apr</strong> — VGW: Discuss Chi performance concerns with Richard (check if this happened). Check with Edwina for CRO team feedback on training.</span></li>
-      </ul>
+      <p class="dimmed-note">Weekly wrap-up runs on Fridays. Last week&#39;s wins: Envato tech sync with 10+ attendees (preferred vendor), Beem It renewal order submitted, SKY uplift going for signature. Gaps: Jumbo partial churn still in negotiation, Mater MAU decline uninvestigated, 12+ overdue Asana tasks. Next Friday&#39;s wrap-up will refresh this section automatically.</p>
     </div>
   </div>
 
 </div>
 
-<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:0.72rem;">
-  CSM Command Centre &middot; Auto-consolidated Wed 29 Apr 2026 17:37 AEST &middot; Sources: Salesforce, Slack, Gmail, Asana, Granola, Google Calendar
-</div>
+<script>
+  const d = window.__DASHBOARD_DATA;
+  if (d) {
+    document.getElementById('ts').textContent = new Date(d.consolidatedAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne', dateStyle: 'medium', timeStyle: 'short' });
+    document.getElementById('stat-risk').textContent = d.stats.atRisk;
+    document.getElementById('stat-open').textContent = d.stats.openItems;
+    document.getElementById('stat-upsell').textContent = d.stats.upsell;
+    document.getElementById('stat-meetings').textContent = d.stats.meetings;
+  }
+</script>
 
 </body>
 </html>
