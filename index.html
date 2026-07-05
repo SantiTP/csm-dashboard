@@ -28,7 +28,7 @@
   .header { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); padding: 24px 32px; border-bottom: 1px solid var(--border); }
   .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
   .header .subtitle { color: var(--text-muted); font-size: 13px; }
-  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px 32px; }
+  .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; padding: 20px 32px; }
   .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
   .stat-card .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
   .stat-card .value { font-size: 28px; font-weight: 700; }
@@ -36,6 +36,7 @@
   .stat-card .value.amber { color: var(--amber); }
   .stat-card .value.green { color: var(--green); }
   .stat-card .value.blue { color: var(--blue); }
+  .stat-card .value.grey { color: var(--text-muted); font-size: 20px; }
   .sections { padding: 0 32px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .section.full-width { grid-column: 1 / -1; }
@@ -65,74 +66,68 @@
 <body>
 <div class="header">
   <h1>CSM Command Centre</h1>
-  <div class="subtitle">Santi Perez &middot; ANZ &middot; Last updated: Thursday 7 May 2026, 10:00 AEST</div>
+  <div class="subtitle">Santi Perez &middot; ANZ &middot; Last updated: Sunday 5 July 2026, 19:08 AEST</div>
 </div>
 <!-- __DASHBOARD_DATA_START__ -->
 <script>
-window.__DASHBOARD_DATA = {"consolidatedAt":"2026-05-07T10:00:00+10:00","stats":{"atRisk":5,"openItems":47,"upsell":5,"meetings":7},"tasks":{"morning-briefing":{"lastRun":"2026-05-07T10:00:00+10:00"},"eod-wrap-up":{"lastRun":"2026-05-06T18:00:00+10:00"},"inbox-triage":{"lastRun":"2026-05-07T10:00:00+10:00"},"monday-weekly-review":{"lastRun":"2026-05-05T09:00:00+10:00"},"friday-weekly-wrap-up":{"lastRun":"2026-05-02T17:00:00+10:00"}}};
+window.__DASHBOARD_DATA = {"consolidatedAt":"2026-07-05T19:08:04+10:00","stats":{"atRisk":6,"openItems":33,"upsell":4,"meetings":1,"pendingReview":null},"tasks":{"morning-briefing":{"lastRun":"2026-07-05T19:08:04+10:00","html":"<ul><li><span class=\"dot red\"></span><strong>Beem It</strong> — Bolt/AP+ transition unconfirmed since June settlement; MAU down 48.8% (3m). No AP+-side champion yet. <span class=\"tag risk\">HIGH RISK</span></li><li><span class=\"dot red\"></span><strong>SEEK</strong> — Renewal outlook Full Churn; sentiment auto-reset to N/A (104 days stale). Needs urgent re-engagement. <span class=\"tag risk\">CRITICAL</span></li><li><span class=\"dot amber\"></span><strong>Culture Amp</strong> — 3rd redundancy round (70 roles/9%) since a strong 24 Jun EBR. Needs-review flagged despite LOW system tier. <span class=\"tag risk\">WATCH</span></li><li><span class=\"dot amber\"></span><strong>Linktree</strong> — Pod agreed outlook should flip Flat→Upsell; EBR pushed to mid-July, up to $1M combined footprint on the table. <span class=\"tag risk\">WATCH</span></li><li><span class=\"dot amber\"></span><strong>Envato (PlaceIt)</strong> — HIGH risk tier; PlaceIt product itself may be sunset within Envato — validate with Karen. <span class=\"tag risk\">WATCH</span></li><li><span class=\"dot blue\"></span><strong>Today</strong> — Santi travelling in Seoul (DMZ Tour, company offsite); no customer meetings scheduled. <span class=\"tag meeting\">TRAVEL</span></li><li><span class=\"dot green\"></span><strong>VGW</strong> — Enterprise uplift proposal in progress (~1.1M MTU/month); event volume run rate 62% of allocation. <span class=\"tag upsell\">UPSELL</span></li><li><span class=\"dot green\"></span><strong>SafetyCulture</strong> — Running at 132.6% of projected consumption; plan-cap-pressure signal ready to package into an upsell ask. <span class=\"tag upsell\">UPSELL</span></li></ul>"},"eod-wrap-up":{"lastRun":"2026-07-05T19:08:04+10:00","html":"<ul><li><span class=\"dot grey\"></span>No CSM activity logged for today — Santi travelling in Seoul (company offsite).</li><li><span class=\"dot amber\"></span><strong>Carry forward</strong>: 114 open account tasks across the book (Customer Intelligence), 1 overdue — Mater Foundation AI Agent/Braze sync, due 3 Jul.</li><li><span class=\"dot amber\"></span><strong>Carry forward</strong>: ~30 overdue items in personal Asana \"Daily CSM Actions\" project (mostly May/June Sky Network, VGW and Mater items) — needs a triage pass.</li><li><span class=\"dot amber\"></span><strong>Carry forward</strong>: reply to Domino's (Janet Ren, onsite enablement scope) and Kmart (Jessica Pan, in-person vs remote for 15 Jul).</li></ul>"},"inbox-triage":{"lastRun":"2026-07-05T19:08:04+10:00","html":"<ul><li><span class=\"dot amber\"></span><strong>Gmail</strong> — Domino's: Janet Ren asked what onsite enablement includes. Reply outstanding. <span class=\"tag overdue\">ACTION</span></li><li><span class=\"dot amber\"></span><strong>Gmail</strong> — Kmart: Jessica Pan locked 1:30–2:30pm Wed 15 Jul, asked in-person vs remote. Confirm. <span class=\"tag overdue\">ACTION</span></li><li><span class=\"dot grey\"></span><strong>Gmail</strong> — Kmart &amp; Domino's Services project email assignments (Abby Solaiman) — review scope, no reply required yet.</li><li><span class=\"dot red\"></span><strong>Asana</strong> — ~30 overdue personal action items (Daily CSM Actions), spanning Sky Network, VGW and Mater. Needs a triage pass.</li><li><span class=\"dot amber\"></span><strong>Customer Intelligence</strong> — 114 open account follow-ups across the book; 1 overdue (Mater Foundation, AI Agent/Braze sync).</li><li><span class=\"dot grey\"></span><strong>Slack</strong> — Routine Momentum \"TSM Updates\" bot digests unread; no new substantive signal surfaced this run.</li></ul>"},"monday-weekly-review":{"lastRun":"2026-05-05T09:00:00+10:00","html":"<ul><li><span class=\"dot grey\"></span>(Last updated: Monday 5 May 2026)</li><li><span class=\"dot green\"></span><strong>Statsig partnership</strong> announced.</li><li><span class=\"dot blue\"></span><strong>Brisbane trip</strong> — Jumbo, RSLQ, Endeavour, Entain that week.</li><li><span class=\"dot amber\"></span><strong>Renewals</strong>: Mater + Jumbo (31 May). BOQ/Beem/SKY to confirm closed.</li><li><span class=\"dot green\"></span><strong>Upsell</strong>: Envato $500K, Sonic $353K, SafetyCulture SR all active.</li></ul>"},"friday-weekly-wrap-up":{"lastRun":"2026-05-02T17:00:00+10:00","html":"<ul><li><span class=\"dot grey\"></span>(Last updated: Friday 2 May 2026)</li><li><span class=\"dot grey\"></span>No newer Friday wrap-up on file — due to refresh this coming Friday.</li></ul>"},"follow-up-pipeline":{"lastRun":"2026-07-05T19:08:04+10:00","html":"<ul><li><span class=\"dot grey\"></span><strong>Local capture pipeline unavailable</strong> — state.json / pending-drafts.json not found this run (no local drive connector attached to this session).</li><li><span class=\"dot amber\"></span>Reminder: nothing in the follow-up capture queue is live in Customer Intelligence until Santi approves it at 4pm AEST.</li><li><span class=\"dot blue\"></span>Recommend checking ~/Documents/Claude/Scheduled/interaction-capture/ directly once a local folder is connected next run.</li></ul>"}}};
 </script>
 <!-- __DASHBOARD_DATA_END__ -->
 <div class="stats-row">
-  <div class="stat-card"><div class="label">At-Risk Accounts</div><div class="value red">5</div></div>
-  <div class="stat-card"><div class="label">Open Items</div><div class="value amber">47</div></div>
-  <div class="stat-card"><div class="label">Upsell Signals</div><div class="value green">5</div></div>
-  <div class="stat-card"><div class="label">Meetings Today</div><div class="value blue">7</div></div>
+  <div class="stat-card"><div class="label">At-Risk Accounts</div><div class="value red">6</div></div>
+  <div class="stat-card"><div class="label">Open Items</div><div class="value amber">33</div></div>
+  <div class="stat-card"><div class="label">Upsell Signals</div><div class="value green">4</div></div>
+  <div class="stat-card"><div class="label">Meetings Today</div><div class="value blue">1</div></div>
+  <div class="stat-card"><div class="label">Pending Follow-Up Reviews</div><div class="value grey">N/A</div></div>
 </div>
 <div class="sections">
   <div class="section full-width"><div class="section-header"><h2>Morning Briefing</h2><span class="badge">Live</span></div><div class="section-body"><ul>
-    <li><span class="dot red"></span><strong>Jumbo Interactive</strong> — $190K ARR, 47.6% utilisation. $85K partial churn in negotiation. <strong>Onsite workshop TODAY 9:00am</strong> at Milton Green, Brisbane. <span class="tag risk">HIGH RISK</span> <span class="tag meeting">MEETING</span></li>
-    <li><span class="dot red"></span><strong>OneDigital Health &amp; Benefits</strong> — $54.9K ARR, 0.1% utilisation, 9 days no contact. Model predicts 100% churn. <span class="tag risk">CRITICAL</span></li>
-    <li><span class="dot red"></span><strong>Beem It</strong> — $75.8K ARR, 0% utilisation. Deal settles end of June. Renewal expired — confirm closure. <span class="tag risk">HIGH RISK</span></li>
-    <li><span class="dot red"></span><strong>Mater Foundation</strong> — $71.2K ARR, 75.2% util, MAU declining. Renewal 31 May. Chase Vashti Wright-Smith. <span class="tag risk">HIGH RISK</span></li>
-    <li><span class="dot amber"></span><strong>Easy Agile</strong> — $86.4K ARR, 40.4% util. MAU down 64%. Renewal 30 Jun. Team shrinking. <span class="tag risk">WATCH</span></li>
-    <li><span class="dot blue"></span><strong>RSLQ</strong> — In-person 12:30pm Anzac House. Billy Perrier, Teresa Breslin, Qi Wang. <span class="tag meeting">MEETING</span></li>
-    <li><span class="dot blue"></span><strong>Endeavour</strong> — 2:00pm Cannon Hill with Therese Rogers. <span class="tag meeting">MEETING</span></li>
-    <li><span class="dot blue"></span><strong>Reece</strong> — Handover blocker 3:30pm. <span class="tag meeting">MEETING</span></li>
-    <li><span class="dot blue"></span><strong>VGW</strong> — Weekly sync 4:30pm. $546K ARR, 131% util. SR loading issue + Braze pending. <span class="tag meeting">MEETING</span></li>
-    <li><span class="dot green"></span><strong>Statsig partnership</strong> — News no longer confidential. Don't publicly post. Review talking points.</li>
+    <li><span class="dot red"></span><strong>Beem It</strong> — Bolt/AP+ transition unconfirmed since June settlement; MAU down 48.8% (3m). No AP+-side champion yet. <span class="tag risk">HIGH RISK</span></li>
+    <li><span class="dot red"></span><strong>SEEK</strong> — Renewal outlook Full Churn; sentiment auto-reset to N/A (104 days stale). Needs urgent re-engagement. <span class="tag risk">CRITICAL</span></li>
+    <li><span class="dot amber"></span><strong>Culture Amp</strong> — 3rd redundancy round (70 roles/9%) since a strong 24 Jun EBR. Needs-review flagged despite LOW system tier. <span class="tag risk">WATCH</span></li>
+    <li><span class="dot amber"></span><strong>Linktree</strong> — Pod agreed outlook should flip Flat→Upsell; EBR pushed to mid-July, up to $1M combined footprint on the table. <span class="tag risk">WATCH</span></li>
+    <li><span class="dot amber"></span><strong>Envato (PlaceIt)</strong> — HIGH risk tier; PlaceIt product itself may be sunset within Envato — validate with Karen. <span class="tag risk">WATCH</span></li>
+    <li><span class="dot blue"></span><strong>Today</strong> — Santi travelling in Seoul (DMZ Tour, company offsite); no customer meetings scheduled. <span class="tag meeting">TRAVEL</span></li>
+    <li><span class="dot green"></span><strong>VGW</strong> — Enterprise uplift proposal in progress (~1.1M MTU/month); event volume run rate 62% of allocation. <span class="tag upsell">UPSELL</span></li>
+    <li><span class="dot green"></span><strong>SafetyCulture</strong> — Running at 132.6% of projected consumption; plan-cap-pressure signal ready to package into an upsell ask. <span class="tag upsell">UPSELL</span></li>
   </ul></div></div>
   <div class="section"><div class="section-header"><h2>Inbox Triage</h2><span class="badge">Live</span></div><div class="section-body"><ul>
-    <li><span class="dot red"></span><strong>Asana</strong>: 47+ open tasks, majority overdue. Urgent triage needed.</li>
-    <li><span class="dot amber"></span><strong>Asana</strong>: Lendi — SDK spec marked complete by Heeren. Verify.</li>
-    <li><span class="dot amber"></span><strong>Gmail</strong>: Xsolla vendor tasks — complete request #12475. <span class="tag overdue">ACTION</span></li>
-    <li><span class="dot amber"></span><strong>Gmail</strong>: CultureAmp — Sam Vertigan tentatively accepted 14 May meeting. Confirm.</li>
-    <li><span class="dot grey"></span><strong>Gmail</strong>: Jumbo workshop — Small Boardroom declined. Sort alternative.</li>
-    <li><span class="dot grey"></span><strong>Slack</strong>: 4 Momentum signal notifications. Review.</li>
-    <li><span class="dot amber"></span><strong>Slack</strong>: Swift 6 thread in #pillar-experiment unacknowledged. <span class="tag overdue">OVERDUE</span></li>
+    <li><span class="dot amber"></span><strong>Gmail</strong> — Domino's: Janet Ren asked what onsite enablement includes. Reply outstanding. <span class="tag overdue">ACTION</span></li>
+    <li><span class="dot amber"></span><strong>Gmail</strong> — Kmart: Jessica Pan locked 1:30–2:30pm Wed 15 Jul, asked in-person vs remote. Confirm. <span class="tag overdue">ACTION</span></li>
+    <li><span class="dot grey"></span><strong>Gmail</strong> — Kmart &amp; Domino's Services project email assignments (Abby Solaiman) — review scope, no reply required yet.</li>
+    <li><span class="dot red"></span><strong>Asana</strong> — ~30 overdue personal action items (Daily CSM Actions), spanning Sky Network, VGW and Mater. Needs a triage pass.</li>
+    <li><span class="dot amber"></span><strong>Customer Intelligence</strong> — 114 open account follow-ups across the book; 1 overdue (Mater Foundation, AI Agent/Braze sync).</li>
+    <li><span class="dot grey"></span><strong>Slack</strong> — Routine Momentum "TSM Updates" bot digests unread; no new substantive signal surfaced this run.</li>
   </ul></div></div>
   <div class="section"><div class="section-header"><h2>Upsell Signals</h2><span class="badge">Live</span></div><div class="section-body"><ul>
-    <li><span class="dot green"></span><strong>Envato</strong> — ~$500K Experiment expansion. RFP in progress. <span class="tag upsell">$500K</span></li>
-    <li><span class="dot green"></span><strong>Sonic Healthcare</strong> — Full platform RFP, $353K tpARR. <span class="tag upsell">$353K</span></li>
-    <li><span class="dot green"></span><strong>SafetyCulture</strong> — SR to displace Hotjar. $472K tpARR. 122% util. <span class="tag upsell">SR PLAY</span></li>
-    <li><span class="dot green"></span><strong>Culture Amp</strong> — G&S + Experiment cross-sell. 126 MAU (+103%). <span class="tag upsell">MULTI</span></li>
-    <li><span class="dot green"></span><strong>Lendi</strong> — Expansion at renewal 30 Jun. $146K ARR, 104.9% util. <span class="tag upsell">EXPAND</span></li>
+    <li><span class="dot green"></span><strong>VGW</strong> — Enterprise uplift proposal (~1.1M MTU/month, 12-month+ term) in progress; awaiting Session Replay retention number. <span class="tag upsell">UPSELL</span></li>
+    <li><span class="dot green"></span><strong>SafetyCulture</strong> — 132.6% of projected consumption, 3 near-cap hits + 2 paywall hits in 90 days. <span class="tag upsell">UPSELL</span></li>
+    <li><span class="dot green"></span><strong>Linktree</strong> — Statsig 350→475 experiments + SR to 50M sessions/month on the table; could reach ~$1M footprint. <span class="tag upsell">UPSELL</span></li>
+    <li><span class="dot green"></span><strong>Wesfarmers OnePass</strong> — Upsell renewal outlook flagged, stable expansion trajectory. <span class="tag upsell">UPSELL</span></li>
   </ul></div></div>
-  <div class="section"><div class="section-header"><h2>EOD Wrap-Up</h2><span class="badge stale">Yesterday</span></div><div class="section-body"><ul>
-    <li><span class="dot blue"></span><strong>Brisbane on-site</strong> — Visited Jumbo Interactive HQ.</li>
-    <li><span class="dot green"></span><strong>Handover prep</strong> — REN account to Ritwik. Context transfer arranged.</li>
-    <li><span class="dot green"></span><strong>Entain</strong> — Centralised data governance adopted. Taxonomy project Nov.</li>
-    <li><span class="dot amber"></span><strong>Carry forward</strong>: Granola folders, Friday summary, SFDC fields, Asana due dates.</li>
-    <li><span class="dot amber"></span><strong>Carry forward</strong>: OOO Slack pins, Pylon escalation routing, Asana access for Richard.</li>
+  <div class="section"><div class="section-header"><h2>EOD Wrap-Up</h2><span class="badge stale">Today</span></div><div class="section-body"><ul>
+    <li><span class="dot grey"></span>No CSM activity logged for today — Santi travelling in Seoul (company offsite).</li>
+    <li><span class="dot amber"></span><strong>Carry forward</strong>: 114 open account tasks across the book (Customer Intelligence), 1 overdue — Mater Foundation AI Agent/Braze sync, due 3 Jul.</li>
+    <li><span class="dot amber"></span><strong>Carry forward</strong>: ~30 overdue items in personal Asana "Daily CSM Actions" project (mostly May/June Sky Network, VGW and Mater items) — needs a triage pass.</li>
+    <li><span class="dot amber"></span><strong>Carry forward</strong>: reply to Domino's (Janet Ren, onsite enablement scope) and Kmart (Jessica Pan, in-person vs remote for 15 Jul).</li>
   </ul></div></div>
-  <div class="section"><div class="section-header"><h2>Meeting Actions</h2><span class="badge">Granola</span></div><div class="section-body"><ul>
-    <li><span class="dot blue"></span><strong>Sky TV</strong> — June leadership session agendas. 3-session structure post-King's Birthday.</li>
-    <li><span class="dot blue"></span><strong>Jumbo</strong> — Contact Josiah Dunmore. Workshop agenda + AI context due.</li>
-    <li><span class="dot amber"></span><strong>Beem/AP+</strong> — Deal settles June. Workshop next week with SE.</li>
-    <li><span class="dot green"></span><strong>Culture Amp</strong> — Two follow-up sessions after Jamie's 14 May session.</li>
-    <li><span class="dot green"></span><strong>Entain</strong> — Ella Levison to help with bet slip ID. Qi delivering taxonomy audit.</li>
+  <div class="section"><div class="section-header"><h2>Follow-Up Pipeline</h2><span class="badge stale">Gate: 4pm</span></div><div class="section-body"><ul>
+    <li><span class="dot grey"></span><strong>Local capture pipeline unavailable</strong> — state.json / pending-drafts.json not found this run (no local drive connector attached to this session).</li>
+    <li><span class="dot amber"></span>Reminder: nothing in the follow-up capture queue is live in Customer Intelligence until Santi approves it at 4pm AEST.</li>
+    <li><span class="dot blue"></span>Recommend checking ~/Documents/Claude/Scheduled/interaction-capture/ directly once a local folder is connected next run.</li>
   </ul></div></div>
   <div class="section"><div class="section-header"><h2>Weekly Review</h2><span class="badge stale">Mon 5 May</span></div><div class="section-body"><ul>
     <li><span class="dot grey"></span>(Last updated: Monday 5 May 2026)</li>
     <li><span class="dot green"></span><strong>Statsig partnership</strong> announced.</li>
-    <li><span class="dot blue"></span><strong>Brisbane trip</strong> — Jumbo, RSLQ, Endeavour, Entain this week.</li>
+    <li><span class="dot blue"></span><strong>Brisbane trip</strong> — Jumbo, RSLQ, Endeavour, Entain that week.</li>
     <li><span class="dot amber"></span><strong>Renewals</strong>: Mater + Jumbo (31 May). BOQ/Beem/SKY to confirm closed.</li>
     <li><span class="dot green"></span><strong>Upsell</strong>: Envato $500K, Sonic $353K, SafetyCulture SR all active.</li>
   </ul></div></div>
   <div class="section"><div class="section-header"><h2>Weekly Wrap-Up</h2><span class="badge stale">Fri 2 May</span></div><div class="section-body"><ul>
     <li><span class="dot grey"></span>(Last updated: Friday 2 May 2026)</li>
-    <li><span class="dot grey"></span>Content will be refreshed this Friday 9 May.</li>
+    <li><span class="dot grey"></span>No newer Friday wrap-up on file — due to refresh this coming Friday.</li>
   </ul></div></div>
 </div>
-<div class="footer">CSM Command Centre · Auto-updated by Cowork · Data from Salesforce, Slack, Gmail, Asana, Granola, Google Calendar</div>
+<div class="footer">CSM Command Centre · Auto-updated by Cowork · Data from Customer Intelligence, Gmail, Asana, Granola, Google Calendar, Slack</div>
 </body>
 </html>
